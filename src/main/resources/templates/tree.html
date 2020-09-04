@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+<!--    <meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+</head>
+<body>
+    <!-- 分类-模态框 -->
+    <div th:fragment="tree-html">
+    <button type="button" class="layui-btn layui-btn-sm" data-toggle="modal" data-target="#catalogue">
+        选择分类：
+    </button>
+    <input type="text"  value="" name="catalogue_title" id="tree-class">
+    <input type="hidden" value="" name="catalogue_id" id="tree-catalog-id">
+    </div>
+
+    <div th:fragment="tree-modal">
+    <!-- 分类--Modal -->
+    <div class="modal fade" id="catalogue" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalCenterTitle">分类选择</h3>
+                    <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">刷新</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="test12" class="demo-tree-more"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+    <div th:fragment="tree-js">
+<script>
+    // var header = $("meta[name='_csrf_header']").attr("content");
+    // var token = $("meta[name='_csrf']").attr("content");
+    // $(document).ajaxSend(function (event, xhr) {
+    //     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    //     xhr.setRequestHeader("val", "val");
+    // });
+    layui.use(['tree', 'util'], function(){
+        var tree = layui.tree
+            ,layer = layui.layer
+            ,util = layui.util
+
+        //获取所有分类数据
+            ,data2;
+        $.get("/catalogue/getAllData",  function (data) {
+            if (data.msg == "OK") {
+                var test=getJsonTree(data.catalogue, 0);
+                data2=test;
+                console.log(data2)
+                //树形分类演示
+                tree.render({
+                    elem: '#test12'
+                    ,data:data2
+                    ,id: 'demoId1'
+                    ,edit: ['add', 'update', 'del'] //操作节点的图标
+                    ,operate: function(obj){
+                        var type = obj.type; //得到操作类型：add、edit、del
+                        var data = obj.data; //得到当前节点的数据
+                        var elem = obj.elem; //得到当前节点元素
+
+                        //Ajax 操作
+                        var id = data.id; //得到节点索引
+                        if(type === 'add'){ //增加节点
+                            //返回 key 值
+                            return addCatalogue(id);
+
+                        } else if(type === 'update'){ //修改节点
+                            console.log(elem.find('.layui-tree-txt').html()); //得到修改后的内容
+                            var title=elem.find('.layui-tree-txt').html();
+                            updateCatalogue(title,data.id);
+
+                        } else if(type === 'del'){ //删除节点
+                            deleteCatalogue(data.id);
+
+                        };
+
+                    }
+                    ,click: function(obj){
+                        var data1 = obj.data;  //获取当前点击的节点数据
+                        var returnedItem; //定义一个不不赋值的变量
+
+                        //输入框取值
+                        $.get("/catalogue/getAllData",function (data) {
+                            if (data.msg == "OK") {
+                                data2=data.catalogue;
+                                console.log(data2)
+                                var path= findPathByLeafId(data1.id,data2)
+                                var title=path[0].title
+                                var id=path[0].id
+                                for(i=1;i<path.length;i++){
+                                    title=title+'->'+path[i].title;
+                                }
+
+                                document.getElementById('tree-class').value=title;
+                                document.getElementById('tree-catalog-id').value=id;
+                                $('#catalogue').modal('hide');
+                                $(".modal-backdrop.fade").hide();
+
+                            } else {
+
+                            }
+                        });
+
+                    }
+                });
+
+            } else {
+                alert("失败！");
+            }
+        });
+
+        //按钮事件
+        util.event('lay-demo', {
+            getChecked: function(othis){
+                var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+
+                layer.alert(JSON.stringify(checkedData), {shade:0});
+                console.log(checkedData);
+
+
+            }
+            ,setChecked: function(){
+                tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+            }
+            ,reload: function(){
+                //重载实例
+                tree.reload('demoId1', {
+
+                });
+
+            }
+        });
+
+    });
+
+  //根据当前节点查找所有父系节点
+    function findPathByLeafId(leafId, nodes, path) {
+        if(path === undefined) {
+            path = [];
+        }
+        for(var i = 0; i < nodes.length; i++) {
+            var tmpPath = path.concat();
+            tmpPath.push(nodes[i]);
+            if(leafId == nodes[i].id) {
+                return tmpPath;
+            }
+            if(nodes[i].children) {
+                var findResult = findPathByLeafId(leafId, nodes[i].children, tmpPath);
+                if(findResult) {
+                    return findResult;
+                }
+            }
+        }
+    }
+
+    //查找父节点
+    function findParent(leafId, nodes, path) {
+        if (path === undefined) {
+            path = [];
+        }
+        for (var i = 0; i < nodes.length; i++) {
+            var tmpPath = path.concat();
+            tmpPath.push(nodes[i]);
+            if (leafId == nodes[i].id) {
+                return tmpPath;
+            }
+        }
+
+    }
+
+    //添加分类
+    function addCatalogue(ids) {
+        var id;
+        $.ajaxSettings.async = false;
+        $.get("/catalogue/getId?", "ids="+ids, function (data) {
+            if (data.msg == "OK") {
+                id=data.id
+            } else {
+                alert("失败！");
+            }
+        });
+        return id;
+    }
+
+    //更新
+    function updateCatalogue(title,id) {
+        var formdata="title="+title+"&"+"id="+id
+        $.ajaxSettings.async = false;
+        $.get("/catalogue/update",formdata, function (data) {
+            if (data.msg == "OK") {
+                layer.msg('修改成功', {
+                    time: 1000 //1s后自动关闭
+                });
+            } else {
+                alert("失败！");
+            }
+        });
+    }
+
+    //删除
+    function deleteCatalogue(id) {
+        $.ajaxSettings.async = false;
+        $.get("/catalogue/delete?","id="+id, function (data) {
+            if (data.msg == "OK") {
+                layer.msg('删除成功', {
+                    time: 1000 //1s后自动关闭
+                });
+            } else {
+                alert("失败！");
+            }
+        });
+    }
+
+    //转为json树形结构函数
+    var getJsonTree = function (data, parentId) {
+        var itemArr = [];
+        for (var i = 0; i < data.length; i++) {
+            var node = data[i];
+            if (node.parent_id === parentId) {
+                if(!node.spread){
+                    var newNode = {id: node.id, title: node.title,children: getJsonTree(data, node.id)};
+                    itemArr.push(newNode);
+                }else{
+                    var newNode = {id: node.id, title: node.title,spread:node.spread, children: getJsonTree(data, node.id)};
+                    itemArr.push(newNode);
+                }
+
+            }
+        }
+        return itemArr;
+    };
+
+
+
+</script>
+    </div>
+
+</body>
+</html>

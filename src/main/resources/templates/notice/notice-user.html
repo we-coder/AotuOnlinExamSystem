@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>试题添加--手工</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">通知</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a th:href="@{/}">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/manage}">公告管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">通知查看</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">通知查看</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="nav flex-column nav-pills nav-secondary" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">全部通知</a>
+                                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">系统通知</a>
+                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">考试通知</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                <div th:each="notice:${notices}" th:if="${notice.status}=='0'" >
+                                                    <p ><strong class="text-danger">[未读]</strong>你有一条通知:
+                                                    <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                        <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                </p>
+                                                </div>
+
+                                                <div th:each="notice:${notices}" th:if="${notice.status}=='1'" >
+                                                    <p ><strong class="text-dark">[已读]</strong>你有一条通知:
+                                                        <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                        <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                <div th:each="notice:${notices}" th:if="${notice.type}=='系统'">
+                                                    <div th:each="notice:${notices}" th:if="${notice.status}=='0'" >
+                                                        <p ><strong class="text-danger">[未读]</strong>你有一条通知:
+                                                            <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                            <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div th:each="notice:${notices}" th:if="${notice.status}=='1'" >
+                                                        <p ><strong class="text-dark">[已读]</strong>你有一条通知:
+                                                            <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                            <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                <div th:each="notice:${notices}" th:if="${notice.type}=='考试'">
+                                                    <div th:each="notice:${notices}" th:if="${notice.status}=='0'" >
+                                                        <p ><strong class="text-danger">[未读]</strong>你有一条通知:
+                                                            <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                            <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div th:each="notice:${notices}" th:if="${notice.status}=='1'" >
+                                                        <p ><strong class="text-dark">[已读]</strong>你有一条通知:
+                                                            <a th:href="@{'/notice/user/read?id='+${notice.id}}" th:text="${notice.title}">标题：价格给乖乖</a>
+                                                            <span th:text="${#strings.abbreviate(notice.content,30)}"></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script>
+    function noticeAdd(){
+
+        $.get("/notice/add",$("#notice-data").serialize(),function (data) {
+
+            if(data=="OK"){
+                alert("发布成功");
+                window.location.reload();
+
+            }else{
+                alert("发布失败，请重试！");
+                window.location.reload();
+
+            }
+        })
+    }
+</script>

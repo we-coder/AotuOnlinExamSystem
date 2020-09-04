@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">成绩查看</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">成绩管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">成绩查看</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded form-inline">
+                    <form  id="testPaper_search" th:action="@{/testPaper/manage}">
+                        <div class="form-group">
+<!--                            <button type="button" class="layui-btn layui-btn-sm" data-toggle="modal" data-target="#catalogue">-->
+<!--                                分类：-->
+<!--                            </button>-->
+
+<!--                            <input type="text"  th:value="${testPaper_type!=null?testPaper_type:''}" name="catalogue_title" id="tree-class" disabled>-->
+                            <input type="hidden"  name="type" id="tree-catalog-id">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelect3">考试名:</label>
+                            <input type="text" class="form-control my-1 mr-sm-2" th:value="${testPaper_name!=null?testPaper_name:''}" name="name"  id="inlineFormCustomSelect3">
+                            <button  class="btn btn-primary" >搜索</button>
+                        </div>
+                    </form>
+
+                </div>
+                <div th:include="tree :: tree-modal" ></div>
+                <div class="row">
+                    <div class="col-md-4" th:each="score:${Scores}">
+                        <div class="card card-dark bg-primary-gradient">
+                            <div class="card-body skew-shadow">
+                                <div class="card-opening" ><h2 th:text="${score.exam_name}">测试试卷</h2></div>
+                                <h1 class=" py-4 mb-0"><strong th:text="${score.grade}">98</strong>分</h1>
+                                <div class="row">
+                                    <div class="col-8 pr-0">
+                                        <div class="card-detail" >
+                                            <a th:href="@{'/grade/testView?user_id='+${session.USER_SESSION.id}+'&exam_id='+${score.exam_id}}" class="btn btn-light btn-rounded">查看试卷</a>
+                                            <a th:href="@{'/testPaper/edit?id='+${score.exam_id}}" class="btn btn-light btn-rounded">数据分析</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 pl-0 text-right">
+                                        <h4 class="fw-bold mb-1" th:text="${#strings.substring(score.create_time,0,10)}">2020-02-01</h4>
+                                        <div class="text-small text-uppercase fw-bold op-8">已改</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+</body>
+</html>

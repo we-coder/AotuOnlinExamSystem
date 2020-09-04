@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">班级管理</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">班级管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">选择班级</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded form-inline">
+                    <form  id="testPaper_search" th:action="@{/class/manage}">
+                        <div class="form-group">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelect3">班级名:</label>
+                            <input type="text" class="form-control my-1 mr-sm-2" th:value="${class_name!=null?class_name:''}" name="class_name"  id="inlineFormCustomSelect3">
+                            <button  class="btn btn-primary" >搜索</button>
+                        </div>
+                    </form>
+                    <div class="ml-md-auto py-2 py-md-0">
+                        <button  class="btn btn-secondary btn-round" data-toggle="modal" data-target="#modal-class">创建班级</button>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4" th:each="class:${classes}">
+                        <div class="card card-info card-annoucement card-round">
+                            <div class="card-body text-center">
+                                <div class="card-opening" th:text="${class.class_name}">2019-2020软件工程期末考试</div>
+                                <div class="card-desc">
+                                    人数:<span th:text="${class.getUsers().size()}"></span>
+                                </div>
+                                <div class="card-detail">
+                                    <a th:href="@{'/class/edit?id='+${class.id}}" class="btn btn-light btn-rounded">查看</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade " id="modal-class" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">新建班级</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="classForm">
+                        <div class="form-group form-inline">
+                            <label for="class_name" class="col-md-3 col-form-label">班级名称</label>
+                            <div class="col-md-9 p-0">
+                                <input type="text" class="form-control input-full" name="class_name" id="class_name" placeholder="请输入任意字符">
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" onclick="addClass()" id="updateUser" class="btn btn-primary" data-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script >
+    function addClass() {
+        $.get("/class/add",$("#classForm").serialize(),function (data) {
+            if(data.msg=="OK"){
+                window.location.href="/class/edit?id="+data.class_id;
+            }
+
+        });
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>试题添加--手工</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">试题录入</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a th:href="@{/}">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/manage}">试题管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/addChoice}">试题录入</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">自动录入</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">自动录入</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                                    <div class="form-inline">
+                                        <form id="ufile"  enctype="multipart/form-data" >
+                                            <input class="form-control mb-2 mr-sm-2" type="file" id="uploadfile" name="uploadfile" multiple="multiple" />
+                                        </form>
+                                        <button class="btn btn-primary mb-2" id="uploadExcel">上传</button>
+                                        <div class="col-md-2 ml-auto">
+                                            <div class="btn-group dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                                    <span class="btn-label"><i class="icon-cloud-download"></i></span>示例模板
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                                    <a class="dropdown-item" th:href="@{/question/downloadExcel}">Excel模板下载</a>
+                                                    <a class="dropdown-item" href="">Word模板下载（暂不支持）</a>
+
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">图像下载</a>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="layui-hide" id="demo" lay-filter="test"></table>
+                                <script type="text/html" id="barDemo">
+                                    <button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" data-toggle="modal" data-target="#lookModalQuestion">查看</button>
+                                    <button class="layui-btn layui-btn-xs" data-toggle="modal" data-target="#modal-profile" lay-event="edit">编辑</button>
+                                    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+                                </script>
+                                <!-- 试题查看--Modal -->
+                                <div class="modal fade" id="lookModalQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="exampleModalCenterTitle">查看</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-inline" id="question3">
+                                                    <h4 class="text-info" id="question_type"></h4>
+                                                    <h3 id="question_title" ></h3>
+                                                    <div class="ml-md-auto py-2 py-md-0">
+                                                        <a class='btn-danger' href="#">12</a>
+                                                    </div>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <ul id="ul-option">
+
+                                                    </ul>
+                                                </div>
+                                                <h3 >解析：<span id="question_analysis"></span></h3>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script th:inline="javascript">
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //执行一个 table 实例
+        var tableQuestion=table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/question/findAllUpload' //数据接口
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data//解析数据列表
+                }
+            }
+            ,title: '试题库'
+            ,page: true //开启分页
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                    ,{field: 'question_title', title: '题干', width:250}
+                    ,{field: 'question_type', title: '题型', width: 90, sort: true}
+                    ,{field: 'question_analysis', title: '解析', width:100, sort: true}
+                    ,{field: 'question_level', title: '难度', width:100, sort: true}
+                    ,{field: 'user_id', title: '创建人', width:100, sort: true}
+                    ,{field: 'create_time', title: '时间', width:160, sort: true}
+                    ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+                ]
+            ]
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data //获取选中的数据
+                ,ids;
+            switch(obj.event){
+                case 'add':
+                    break;
+                case 'update':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else {
+                        ids = "ids=" + data[0].id;
+                        for (var i = 1; i < data.length; i++) {
+                            ids = ids + "&" + "ids=" + data[i].id
+                        }
+                        layer.confirm('真的删除'+ids+'么', function(index) {
+                            $.get("/question/delete", ids, function (data) {
+                                if (data.msg == "OK") {
+                                    layer.msg('删除' + ids + '成功！');
+                                    tableQuestion.reload({
+                                        url:'/question/findAll'
+                                    });
+                                } else {
+                                    layer.msg('删除失败');
+                                }
+
+
+                            })
+                        })
+                    }
+                    break;
+            };
+        });
+
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+                //根据输入框id对其进行赋值
+                $.get("/question/findOne","id="+data.id,function (data) {
+                    if(data.msg=="OK"){
+                        layer.msg("ok");
+                        //给选项置空
+                        $("#ul-option").empty();
+                        //赋值给单道题
+                        $("#question_type").html(data.question.question_type);
+                        $("#question_title").html(data.question.question_title);
+                        $("#question_analysis").html(data.question.question_analysis);
+
+                        var rs;
+                        for (var i=0;data.question.options.length;i++){
+                            if(data.question.options[i].opt_status==1){
+                                rs="<li >\n" +
+                                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\" checked=\"checked\" name=\"answer\" value=\"1\" disabled>\n" +
+                                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer1\">"+data.question.options[i].opt_content+"</label>\n" +
+                                    "                               </li>";
+                            }else{
+                                rs="<li >\n" +
+                                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\"  name=\"answer\" value=\"0\" disabled>\n" +
+                                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">"+data.question.options[i].opt_content+"</label>\n" +
+                                    "                               </li>"
+                            }
+
+                            $('#ul-option').append(rs);
+                        }
+                    }
+                });
+
+            } else if(layEvent === 'del'){
+                layer.confirm('真的删除id='+data.id+'的题目么', function(index){
+                    $.get("/question/delete",'ids='+data.id,function (data) {
+                        if(data.msg=="OK"){
+                            obj.del(); //删除对应行（tr）的DOM结构
+                            layer.close(index);
+                            layer.msg('删除成功');
+                        }else
+                        {
+                            layer.msg('删除失败');
+                        }
+
+
+                    })
+                });
+            } else if(layEvent === 'edit'){
+                window.location="/question/edit?id="+data.id;
+
+            }
+        });
+
+        uploadExcel.onclick=function(){
+            var formData = new FormData($('#ufile')[0]);//获取表单中的文件
+            console.log(formData);
+            if($('#uploadfile').get(0).files[0]) {
+                $.ajax({
+                    url: "/question/uploadExcel",//后台的接口地址
+                    type: "post",//post请求方式
+                    data: formData,//参数
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.msg == "OK") {
+                            alert("试题录入成功，数据将在下方显示出来");
+                            tableQuestion.reload({
+                                where: { //设定异步数据接口的额外参数，任意设
+                                    source: data.source
+                                }
+                                ,page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        } else {
+                            alert("试题录入失败！");
+                            window.location.reload();
+                        }
+                    }
+                })
+            }else {
+                alert("您还没有选择Excel文件，请选择格式为xls，xlsx的Excel文件（大小为10MB以下）")
+            }
+
+        }
+
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

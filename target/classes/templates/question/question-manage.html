@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>题库管理</title>
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+	<th:block th:include="/public::css"></th:block>
+
+</head>
+<body>
+<div class="wrapper">
+	<!-- 顶部导航、边栏 -->
+	<th:block th:include="public :: header" ></th:block>
+	<!--内容-->
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">题库操作</h4>
+						<ul class="breadcrumbs">
+							<li class="nav-home">
+								<a href="#">
+									<i class="flaticon-home"></i>
+								</a>
+							</li>
+							<li class="separator">
+								<i class="flaticon-right-arrow"></i>
+							</li>
+							<li class="nav-item">
+								<a href="#">题库管理</a>
+							</li>
+							<li class="separator">
+								<i class="flaticon-right-arrow"></i>
+							</li>
+							<li class="nav-item">
+								<a href="#">题库操作</a>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">试题管理</h4>
+										<a th:href="@{/question/addManual}" class="btn btn-primary btn-round ml-auto" >
+											<i class="fa fa-plus"></i>
+											添加试题
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="modal-body">
+										<form class="form-inline" id="question_choice6">
+											<button type="button" class="layui-btn layui-btn-sm" data-toggle="modal" data-target="#catalogue">
+												分类：
+											</button>
+											<input type="text"  disabled class="form-control" value="" name="catalogue_title" id="tree-class">
+											<input type="hidden" value="" name="question_class" id="tree-catalog-id">
+											<div class="form-group">
+												<label class="my-1 mr-2" for="modal_question_type">题型:</label>
+												<select class="custom-select my-1 mr-sm-2" name="question_type"  id="modal_question_type">
+													<option selected value="">请选择</option>
+													<option value="单选题" >单选题</option>
+													<option value="多选题" >多选题</option>
+													<option value="判断题">判断题</option>
+													<option value="主观题">主观题</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="my-1 mr-2" for="modal_question_level">类型：</label>
+												<select class="custom-select my-1 mr-sm-2" name="question_level"  id="modal_question_level">
+													<option selected value="">请选择</option>
+													<option value="简单" >简单</option>
+													<option value="中等">中等</option>
+													<option value="困难">困难</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="my-1 mr-2" for="modal_question_title">题目：</label>
+												<input type="text" id="modal_question_title" class="form-control" value=""  name="question_title">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a class="btn btn-primary" id="questionSearch" href="#">查询</a>
+											</div>
+										</form>
+										<table class="layui-hide" id="demo" lay-filter="test"></table>
+										<script type="text/html" id="barDemo">
+											<button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" data-toggle="modal" data-target="#lookModalQuestion">查看</button>
+											<button class="layui-btn layui-btn-xs" data-toggle="modal" data-target="#modal-profile" lay-event="edit">编辑</button>
+											<button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+										</script>
+										<div th:include="tree :: tree-modal" ></div>
+                                        <!-- 试题查看--Modal -->
+                                        <div class="modal fade" id="lookModalQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalCenterTitle">查看</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-inline" id="question3">
+                                                            <h4 class="text-info" id="question_type"></h4>
+                                                            <h3 id="question_title" ></h3>
+                                                            <div class="ml-md-auto py-2 py-md-0">
+                                                                <span id="question_level"  >12</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <ul id="ul-option">
+
+                                                            </ul>
+                                                        </div>
+                                                        <h3 >解析：<span id="question_analysis"></span></h3>
+														<h3 >分类：<span id="question_class"></span></h3>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div th:include="public :: footer" ></div>
+		</div>
+
+		<!-- End Custom template -->
+</div>
+	<!--   Core JS Files   -->
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script th:inline="javascript">
+
+	layui.use('table', function(){
+		var table = layui.table;
+
+		//执行一个 table 实例
+		var tableQuestion=table.render({
+			elem: '#demo'
+			,height: 540
+			,url: '/question/findAll' //数据接口
+			,parseData: function(res) { //res 即为原始返回的数据
+				return {
+					"code": res.code, //解析接口状态
+					"msg": res.msg, //解析提示文本
+					"count": res.count, //解析数据长度
+					"data": res.data //解析数据列表
+				}
+			}
+			,title: '试题库'
+			,page: true //开启分页
+			,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+			,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+				title: '提示'
+				,layEvent: 'LAYTABLE_TIPS'
+				,icon: 'layui-icon-tips'
+			}]
+			,cols: [
+				[ //表头
+					{type: 'checkbox', fixed: 'left'}
+					,{field: 'question_title', title: '题干'}
+					,{field: 'question_analysis', title: '解析', width:200, sort: true}
+					,{field: 'question_type', title: '题型', width: 80, sort: true}
+					,{field: 'question_level', title: '难度', width:80, sort: true}
+					,{field:'question_class',title:'分类',width:80,sort:true}
+					,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+				]
+			]
+		});
+
+		//监听头工具栏事件
+		table.on('toolbar(test)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id)
+					,data = checkStatus.data //获取选中的数据
+		            ,ids;
+			switch(obj.event){
+				case 'add':
+					break;
+				case 'update':
+					if(data.length === 0){
+						layer.msg('请选择一行');
+					} else if(data.length > 1){
+						layer.msg('只能同时编辑一个');
+					} else {
+						layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+					}
+					break;
+				case 'delete':
+					if(data.length === 0){
+						layer.msg('请选择一行');
+					} else {
+						ids = "ids=" + data[0].id;
+						for (var i = 1; i < data.length; i++) {
+							ids = ids + "&" + "ids=" + data[i].id
+						}
+						layer.confirm('真的删除'+ids+'么', function(index) {
+							$.get("/question/delete", ids, function (data) {
+								if (data.msg == "OK") {
+									layer.msg('删除' + ids + '成功！');
+									tableQuestion.reload({
+										url:'/question/findAll'
+									});
+								} else {
+									layer.msg('删除失败');
+								}
+
+
+							})
+						})
+					}
+					break;
+			};
+		});
+
+
+		//监听行工具事件
+		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var data = obj.data //获得当前行数据
+					,layEvent = obj.event; //获得 lay-event 对应的值
+			if(layEvent === 'detail'){
+                //根据输入框id对其进行赋值
+                $.get("/question/findOne","id="+data.id,function (data) {
+                   if(data.msg=="OK"){
+                       //给选项置空
+                       $("#ul-option").empty();
+                       //赋值给单道题
+                       $("#question_type").html(data.question.question_type);
+					   $("#question_level").html(data.question.question_level);
+					   $("#question_class").html(data.question.question_class);
+                       $("#question_title").html(data.question.question_title);
+                       $("#question_analysis").html(data.question.question_analysis);
+
+                       var rs;
+                       for (var i=0;data.question.options.length;i++){
+                           if(data.question.options[i].opt_status==1){
+                               rs="<li >\n" +
+                                   "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\" checked=\"checked\" name=\"answer\" value=\"1\" disabled>\n" +
+                                   "                               <label class=\"custom-control-label\" for=\"checkbox-answer1\">"+data.question.options[i].opt_content+"</label>\n" +
+                                   "                               </li>";
+                           }else{
+                               rs="<li >\n" +
+                                   "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\"  name=\"answer\" value=\"0\" disabled>\n" +
+                                   "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">"+data.question.options[i].opt_content+"</label>\n" +
+                                   "                               </li>"
+                           }
+
+                           $('#ul-option').append(rs);
+                       }
+                   }
+                });
+
+			} else if(layEvent === 'del'){
+				layer.confirm('真的删除id='+data.id+'的题目么', function(index){
+					$.get("/question/delete",'ids='+data.id,function (data) {
+						if(data.msg=="OK"){
+							obj.del(); //删除对应行（tr）的DOM结构
+							layer.close(index);
+							layer.msg('删除成功');
+						}else
+						{
+							layer.msg('删除失败');
+						}
+
+
+					})
+				});
+			} else if(layEvent === 'edit'){
+			    window.location="/question/edit?id="+data.id;
+
+			}
+		});
+
+		questionSearch.onclick=function(){
+			var question_type=document.getElementById('modal_question_type').value
+					,question_title=document.getElementById('modal_question_title').value
+					,question_class=document.getElementById('tree-catalog-id').value
+					,question_level=document.getElementById('modal_question_level').value;
+			tableQuestion.reload({
+				where: { //设定异步数据接口的额外参数，任意设
+					question_type: question_type
+					,question_title: question_title
+					,question_class: question_class
+					,question_level: question_level
+				}
+				,page: {
+					curr: 1 //重新从第 1 页开始
+				}
+			});
+		}
+
+	});
+
+
+
+	function test(test){
+		test.parentNode.parentNode.parentNode.parentNode.removeChild(test.parentNode.parentNode.parentNode);
+	}
+
+	function addQuestion(id) {
+
+		//全部选项数据
+		var optionData=checkedData();
+		//分类数据
+		var data=$("#question_choice").serialize();
+		//全部数据
+		var allData;
+		//判断哪种题型
+		if(id=='1'){
+			//题目数据
+			var data1=$('#question_form1').serialize();
+			allData=data+"&"+optionData+"&"+data1;
+		}else if(id=='2'){
+			var data2=$('#question_form2').serialize();
+			allData=data+"&"+optionData+"&"+data2+"&"+"question_type=3";
+		}else if(id=='3'){
+			var data3=$('#question_form3').serialize();
+			allData=data+"&"+data3+"&"+"question_type=4";
+		}
+
+		$.get("/question/add.action",allData,function(data){
+			if(data.msg =="OK"){
+				alert("成功！");
+				window.location.reload();
+			}else{
+				alert("失败！");
+				window.location.reload();
+			}
+		});
+
+	}
+
+	//序列化选项数据
+	function checkedData() {
+		var testData=answerAll();
+		var oo;
+		for (var j=0;j<testData.length;j++){
+			if(!oo){
+				oo="opt_status"+"="+testData[j].value
+			}else{
+				oo=oo+"&"+"opt_status"+"="+testData[j].value
+			}
+
+		}
+		return oo;
+		// alert(oo);
+	}
+
+	//为选项赋值，0：错误，1：正确
+	function answerAll() {
+		var options = $("input[name='opt_status']");
+		var optList=new Array();
+		for (var j=0;j<options.length;j++){
+			if(!options[j].checked){
+				options[j].value="0";
+				optList.push(options[j])
+			}else{
+				options[j].value="1";
+				optList.push(options[j])
+			}
+		}
+		return optList
+	}
+</script>
+</body>
+</html>

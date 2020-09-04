@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ba405990-71f8-4fec-a0e8-eb6508c5b55c" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="aoes: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="aoes: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="aoes: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="achievement: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="aoes: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="answer_sheet: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aoes" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="aoes: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="testpaper: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\soft\apache-maven-3.6.1\repository" />
+        <option name="mavenHome" value="D:/soft/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\soft\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TK7w5jqUfgl07js26xFDc2C02U" />
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/paper" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\static\paper" />
+      <recent name="E:\Project\IDEAS\aoes\target\classes\static\uploadfile\templateFile" />
+      <recent name="E:\Project\IDEAS\aoes\target\classes\static\uploadfile\templateFlie" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\static\assets\index\plugins" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\static\assets\index" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Project\IDEAS\aoes\target\classes\static\uploadfile\templateFile" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\templates" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\templates\user" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\templates\question" />
+      <recent name="E:\Project\IDEAS\aoes\src\main\resources\templates\testPaper" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="AoesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="aoes" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.btson.aoes.AoesApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ba405990-71f8-4fec-a0e8-eb6508c5b55c" name="Default Changelist" comment="" />
+      <created>1573197168822</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573197168822</updated>
+      <workItem from="1573197172226" duration="6961000" />
+      <workItem from="1573220800869" duration="3076000" />
+      <workItem from="1573223937240" duration="10238000" />
+      <workItem from="1573265686978" duration="22734000" />
+      <workItem from="1573317672728" duration="2011000" />
+      <workItem from="1573356084872" duration="20694000" />
+      <workItem from="1573439309206" duration="3882000" />
+      <workItem from="1573457102726" duration="6700000" />
+      <workItem from="1573467723512" duration="16970000" />
+      <workItem from="1573519254930" duration="5019000" />
+      <workItem from="1573525822859" duration="4853000" />
+      <workItem from="1573540384610" duration="20877000" />
+      <workItem from="1573566964335" duration="10100000" />
+      <workItem from="1573612502785" duration="3764000" />
+      <workItem from="1574037057209" duration="12229000" />
+      <workItem from="1574059626483" duration="15148000" />
+      <workItem from="1574123858018" duration="7745000" />
+      <workItem from="1574146676847" duration="18222000" />
+      <workItem from="1574169506827" duration="9764000" />
+      <workItem from="1574209799097" duration="1810000" />
+      <workItem from="1574215923412" duration="71000" />
+      <workItem from="1574218937875" duration="424000" />
+      <workItem from="1574219695939" duration="6000" />
+      <workItem from="1574222149888" duration="371000" />
+      <workItem from="1574223446862" duration="3694000" />
+      <workItem from="1574235812638" duration="137000" />
+      <workItem from="1574238919284" duration="102000" />
+      <workItem from="1574255337407" duration="8000" />
+      <workItem from="1574478792249" duration="29750000" />
+      <workItem from="1574564657951" duration="32779000" />
+      <workItem from="1574642378444" duration="11964000" />
+      <workItem from="1574663299472" duration="19438000" />
+      <workItem from="1574688166893" duration="11406000" />
+      <workItem from="1574728211335" duration="5899000" />
+      <workItem from="1574750561547" duration="6552000" />
+      <workItem from="1574765405236" duration="178000" />
+      <workItem from="1574770362969" duration="152000" />
+      <workItem from="1574775495064" duration="1277000" />
+      <workItem from="1574814547027" duration="9690000" />
+      <workItem from="1574832169475" duration="7021000" />
+      <workItem from="1574904837385" duration="14494000" />
+      <workItem from="1575123066196" duration="395000" />
+      <workItem from="1575247212271" duration="11230000" />
+      <workItem from="1575268978441" duration="11793000" />
+      <workItem from="1575287082472" duration="3563000" />
+      <workItem from="1575333779784" duration="9841000" />
+      <workItem from="1575355105421" duration="10711000" />
+      <workItem from="1575371482665" duration="10545000" />
+      <workItem from="1575419787077" duration="10726000" />
+      <workItem from="1575430928959" duration="606000" />
+      <workItem from="1575454620382" duration="19472000" />
+      <workItem from="1575515681771" duration="11573000" />
+      <workItem from="1575606806640" duration="1436000" />
+      <workItem from="1575686934568" duration="20413000" />
+      <workItem from="1575776720218" duration="18471000" />
+      <workItem from="1575851852509" duration="9798000" />
+      <workItem from="1575873321762" duration="9172000" />
+      <workItem from="1575887395032" duration="19393000" />
+      <workItem from="1575938083742" duration="12238000" />
+      <workItem from="1575952548438" duration="16832000" />
+      <workItem from="1575974425257" duration="12305000" />
+      <workItem from="1576024462921" duration="8742000" />
+      <workItem from="1576048399420" duration="1545000" />
+      <workItem from="1576126095337" duration="19572000" />
+      <workItem from="1576218677411" duration="1217000" />
+      <workItem from="1576316052517" duration="18595000" />
+      <workItem from="1576384925915" duration="13960000" />
+      <workItem from="1576460408985" duration="8042000" />
+      <workItem from="1576481127973" duration="9223000" />
+      <workItem from="1576492851056" duration="11490000" />
+      <workItem from="1576542814307" duration="11553000" />
+      <workItem from="1576565390298" duration="11561000" />
+      <workItem from="1576579661860" duration="5399000" />
+      <workItem from="1576629226641" duration="11876000" />
+      <workItem from="1576645182324" duration="4619000" />
+      <workItem from="1576828062164" duration="10542000" />
+      <workItem from="1576908645687" duration="3990000" />
+      <workItem from="1576994468604" duration="11795000" />
+      <workItem from="1577061878920" duration="8549000" />
+      <workItem from="1577075607840" duration="12016000" />
+      <workItem from="1577158590126" duration="49000" />
+      <workItem from="1577170229620" duration="7960000" />
+      <workItem from="1577453190421" duration="5859000" />
+      <workItem from="1577704075000" duration="7795000" />
+      <workItem from="1577965815600" duration="3192000" />
+      <workItem from="1578922708342" duration="596000" />
+      <workItem from="1580006714487" duration="20828000" />
+      <workItem from="1580265148792" duration="16679000" />
+      <workItem from="1580465749064" duration="5851000" />
+      <workItem from="1580527849922" duration="19548000" />
+      <workItem from="1580612976871" duration="11223000" />
+      <workItem from="1580702125168" duration="34971000" />
+      <workItem from="1580784467541" duration="16100000" />
+      <workItem from="1580872150711" duration="38408000" />
+      <workItem from="1581050978529" duration="8298000" />
+      <workItem from="1581139483919" duration="650000" />
+      <workItem from="1581300467587" duration="63684000" />
+      <workItem from="1581475715363" duration="10359000" />
+      <workItem from="1581571938116" duration="1242000" />
+      <workItem from="1581653922438" duration="22735000" />
+      <workItem from="1581739941742" duration="17217000" />
+      <workItem from="1581828124251" duration="19595000" />
+      <workItem from="1581912786106" duration="4941000" />
+      <workItem from="1581923404369" duration="3121000" />
+      <workItem from="1581926977462" duration="4220000" />
+      <workItem from="1582181420018" duration="1453000" />
+      <workItem from="1582550162359" duration="3067000" />
+      <workItem from="1582641689188" duration="1655000" />
+      <workItem from="1583040321536" duration="1346000" />
+      <workItem from="1583649189004" duration="11669000" />
+      <workItem from="1583754158670" duration="12857000" />
+      <workItem from="1583847254417" duration="705000" />
+      <workItem from="1583930503759" duration="6769000" />
+      <workItem from="1584181333948" duration="15805000" />
+      <workItem from="1588072283076" duration="4681000" />
+      <workItem from="1588164702748" duration="114608000" />
+      <workItem from="1588563074872" duration="3179000" />
+      <workItem from="1588679611918" duration="10202000" />
+      <workItem from="1588743849427" duration="16702000" />
+      <workItem from="1588992765589" duration="9536000" />
+      <workItem from="1589005433934" duration="5686000" />
+      <workItem from="1591359430617" duration="2146000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/btson/aoes/controller/UserController.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="user2.roles.get(0)" />
+        <watch expression="questions" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/aoes$AoesApplication.ic" NAME="AoesApplication Coverage Results" MODIFIED="1588486471264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

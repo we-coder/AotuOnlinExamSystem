@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>禁止访问</title>
+	<th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+	<!-- 顶部导航、边栏 -->
+	<th:block th:include="public :: header" ></th:block>
+	<!--内容-->
+	<div class="main-panel">
+		<div class="content">
+			<div class="panel-header bg-primary-gradient ">
+				<div class="page-inner py-5 ">
+					<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+
+					</div>
+				</div>
+			</div>
+			<div class="page-inner mt--5">
+				<div class="row mt--2">
+					<div class="col-md-12">
+						<div class="card full-height">
+							<div class="card-header text-center">
+								<h1 class="text-danger" >你没权限访问该页面</h1>
+							</div>
+							<div class="card-body text-center">
+								<h3>你的身份为：<span class="text-info" th:each="role:${session.USER_SESSION.roles}" th:text="${role.name}"></span></h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:include="public :: footer" ></div>
+	</div>
+
+	<!-- 主题 -->
+	<th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>

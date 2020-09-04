@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h2 class="text-white pb-2 fw-bold">加入班级</h2>
+                            <h5 class="text-white op-7 mb-2">by venson</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner mt--5">
+                <div class="row mt--2">
+                    <div class="col-md-12">
+                        <div class="card full-height">
+                            <div class="card-body text-center">
+                                <div class="card-title">是否加入班级<h3 class="text-danger" th:text="${class.class_name}"></h3></div>
+                                <input id="class_id" name="class_id" type="hidden" th:value="${class.id}">
+                                <div class="card-category"><button class="btn btn-primary" onclick="addClass()">确认加入</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script>
+    function addClass() {
+        $.post("/examinees/addClass",$("#class_id").serialize(),function (data) {
+            if (data=="OK"){
+                alert("你已成功加入班级")
+                window.location.href="/examinees/manage"
+            }else {
+                alert("未能加入班级，请重试或者联系管理员")
+            }
+
+        })
+
+    }
+</script>
+
+</body>
+</html>

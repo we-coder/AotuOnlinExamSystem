@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>自动组卷</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h2 class="text-white pb-2 fw-bold">自动组卷</h2>
+                            <h5 class="text-white op-7 mb-2">随机抽取试题组成试卷 </h5>
+                        </div>
+                        <div class="ml-md-auto py-2 py-md-0">
+                            <a th:href="@{/testPaper/manage}" class="btn btn-white btn-border btn-round mr-2">管理考试</a>
+                            <a th:href="@{/exam/set}" class="btn btn-secondary btn-round">发布考试</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card full-height">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">基于自选规则进行抽题</div>
+                                    <div class="ml-md-auto py-2 py-md-0">
+                                        <button class="btn btn-primary btn-refresh-card" onclick="getQuestions(0)">生成试卷</button>
+                                    </div>
+                                </div>
+                                <div class="card-category">Data analysis based on each test</div>
+                            </div>
+                            <div class="card-body">
+                                <form id="testPaper-head-data">
+                                    <div class=" form-group">
+                                        <label  for="testpaper_name">试卷名称：</label>
+                                        <input type="text" name="name" class="form-control" id="testpaper_name" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class=" form-group">
+                                        <button type="button" class="layui-btn layui-btn-sm" data-toggle="modal" data-target="#catalogue">
+                                        试卷范围：
+                                        </button>
+                                        <input type="text" disabled  value="默认全部" class="form-control"  name="catalogue_title" id="tree-class">
+                                        <input type="hidden"  name="type" id="tree-catalog-id">
+                                        <div th:include="tree :: tree-modal" ></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="duration"><div class="d-inline p-2 bg-primary text-white">考试时长：</div></label>
+                                        <input type="text" value="1:30:00" class="form-control" name="duration" id="duration" placeholder="分钟">
+                                    </div>
+                                </form>
+                                <form id="question-type-data">
+                                    <div class="form-group">
+                                    <label>题型选择:</label>
+                                        <div class="row">
+                                            <div class="col-6 col-sm-3">
+                                                <label class="imagecheck mb-2">
+                                                    <input name="questionType" type="checkbox" value="Single" class="imagecheck-input" checked>
+                                                    <figure class="imagecheck-figure">
+                                                        <img src="../../assets/img/question/single.png" alt="title" class="imagecheck-image">
+                                                    </figure>
+                                                </label>
+                                            </div>
+                                            <div class="col-6 col-sm-3">
+                                                <label class="imagecheck mb-2">
+                                                    <input name="questionType" type="checkbox" value="Multiple" class="imagecheck-input" checked>
+                                                    <figure class="imagecheck-figure">
+                                                        <img src="../../assets/img/question/muti.png" alt="title" class="imagecheck-image">
+                                                    </figure>
+                                                </label>
+                                            </div>
+                                            <div class="col-6 col-sm-3">
+                                                <label class="imagecheck mb-4">
+                                                    <input name="questionType" type="checkbox" value="TrueOrFalse" class="imagecheck-input" checked>
+                                                    <figure class="imagecheck-figure">
+                                                        <img src="../../assets/img/question/TrueOrFalse.png" alt="title" class="imagecheck-image">
+                                                    </figure>
+                                                </label>
+                                            </div>
+                                            <div class="col-6 col-sm-3">
+                                                <label class="imagecheck mb-4">
+                                                    <input name="questionType" type="checkbox" value="Subjective" class="imagecheck-input" checked>
+                                                    <figure class="imagecheck-figure">
+                                                        <img src="../../assets/img/question/objective.png" alt="title" class="imagecheck-image">
+                                                    </figure>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-header">
+                                <h3>单选题</h3>
+                            </div>
+                            <div class="card-body" >
+                                <form id="Single">
+                                    <input name="questionType" type="hidden" value="单选" >
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">简单</span>
+                                        </div>
+                                        <input type="number" name="simple" value="3" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">中等</span>
+                                        </div>
+                                        <input type="number" name="medium" value="5" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">困难</span>
+                                        </div>
+                                        <input type="number" name="difficult" value="2" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-header">
+                                <h3>多选题</h3>
+                            </div>
+                            <div class="card-body" >
+                                <form id="Multiple">
+                                    <input name="questionType" type="hidden" value="多选" >
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">简单</span>
+                                        </div>
+                                        <input type="number" name="simple" value="3" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">中等</span>
+                                        </div>
+                                        <input type="number" name="medium" value="5" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">困难</span>
+                                        </div>
+                                        <input type="number" name="difficult" value="2" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-header">
+                                <h3>判断题</h3>
+                            </div>
+                            <div class="card-body" >
+                                <form id="TrueOrFalse">
+                                    <input name="questionType" type="hidden" value="判断" >
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">简单</span>
+                                        </div>
+                                        <input type="number" name="simple" value="1" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">中等</span>
+                                        </div>
+                                        <input type="number" name="medium" value="3" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">困难</span>
+                                        </div>
+                                        <input type="number" name="difficult" value="1" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-header">
+                                <h3>主观题</h3>
+                            </div>
+                            <div class="card-body" >
+                                <form id="Subjective">
+                                    <input name="questionType" type="hidden" value="主观" >
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">简单</span>
+                                        </div>
+                                        <input type="number" name="simple" value="0" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">中等</span>
+                                        </div>
+                                        <input type="number" name="medium" value="0" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">困难</span>
+                                        </div>
+                                        <input type="number" name="difficult" value="3" class="form-control" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">道</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="d-flex align-items-center">
+                                        <h4 class="card-title">生成内容</h4>
+                                        <button class="btn btn-success  btn-sm" onclick="getQuestions(0)">重新生成</button>
+                                        &nbsp;
+                                        <button class="btn btn-success btn-sm" onclick="getQuestions(1)">继续添加</button>
+                                        <div class="ml-md-auto py-2 py-md-0">
+                                            <button onclick="addTestPaper()" class="btn btn-primary btn-refresh-card">保存试卷</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline" id="question_choice">
+                                        <div class="form-group">
+                                            <label for="setScore">分数</label>
+                                            <input type="text" class="form-control" id="setScore" name="setScore" />
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                设置
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" onclick="setScore(1)" href="#">单选</a>
+                                                <a class="dropdown-item" onclick="setScore(2)" href="#">多选</a>
+                                                <a class="dropdown-item" onclick="setScore(3)" href="#">判断</a>
+                                                <a class="dropdown-item" onclick="setScore(4)" href="#">主观</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" onclick="setScore(5)" href="#">全部</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <form id="testPaper-body-data">
+                                    <div id="container">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script type="text/javascript">
+
+    var objDate=new Date();
+    //默认设置试卷名字
+    $("#testpaper_name").val("T"+objDate.getFullYear()+objDate.getMonth()+objDate.getDay()+objDate.getHours()+objDate.getMinutes()+objDate.getSeconds()+"抽题试卷")
+    //日期选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //开始时间
+        laydate.render({
+            elem: '#start_time'
+            , type: 'datetime'
+        });
+        //开始时间
+        laydate.render({
+            elem: '#end_time'
+            , type: 'datetime'
+        });
+        //开始时间
+        laydate.render({
+            elem: '#duration'
+            , type: 'time'
+        });
+    });
+
+    (function($){
+        $.fn.serializeJson=function(){
+            var serializeObj={};
+            var array=this.serializeArray();
+            var str=this.serialize();
+            $(array).each(function(){
+                if(serializeObj[this.name]){
+                    if($.isArray(serializeObj[this.name])){
+                        serializeObj[this.name].push(this.value);
+                    }else{
+                        serializeObj[this.name]=[serializeObj[this.name],this.value];
+                    }
+                }else{
+                    serializeObj[this.name]=this.value;
+                }
+            });
+            return serializeObj;
+        };
+    })(jQuery);
+
+    function getQuestions(status){
+
+        if(status===0){
+            $("div").remove("div[name='questionDiv']");
+
+        }
+
+        var questionTypeList=new Array();
+        $('input[name="questionType"]:checked').each(function(){
+            questionTypeList.push($(this).val());//向数组中添加元素
+        });
+        console.log("questionTypeData",questionTypeList);
+        var question;
+        var questionList=new Array();
+        for(var i=0;i<questionTypeList.length;i++){
+            var qtype=questionTypeList[i];
+            question=$("#"+questionTypeList[i]).serializeJson();
+            questionList.push(question);
+            console.log('question',questionList);
+
+        }
+        $.ajax({
+            type: "POST",
+            url: "/testPaper/addExtract?QuestionClass="+$("#tree-catalog-id").val(),
+            data: JSON.stringify(questionList),
+            dataType: "json",
+            contentType:"application/json",
+            success: function(data){
+                var questions=data.data;
+                for (var i=0;i<questions.length;i++){
+                    addDiv(questions[i])
+                }
+            }
+        });
+
+    }
+
+    var container =document.getElementById('container');
+    var node=container.nextSibling;
+    var count = 0;
+    function addDiv(data){
+        oDiv = document.createElement('div');
+        var sc;
+        var cc=data.question_type.search('单选')
+
+        if (data.question_type==='单选'||data.question_type==='单选题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-1\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='多选'||data.question_type==='多选题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-2\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='判断'||data.question_type==='判断题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-3\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='主观'||data.question_type==='主观题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-4\" value=\"10\" name=\"score\" />";
+        };
+        var rs="";
+        for (var i=0;i<data.options.length;i++) {
+
+            if (data.options[i].opt_status == 1) {
+                rs =rs+"<li >\n" +
+                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\" checked=\"checked\" name=\"answer\" value=\"1\" disabled>\n" +
+                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+                    "                               </li>";
+            } else {
+                rs =rs+"<li >\n" +
+                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\"  name=\"answer\" value=\"0\" disabled>\n" +
+                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+                    "                               </li>"
+            }
+        }
+        oDiv.innerHTML =" <div id=\"container1\" name='questionDiv'>\n" +
+            "                                    <div class=\"shadow-sm p-3 mb-5 bg-grey1 rounded\">\n" +
+            "                                        <div class=\"form-inline\" id=\"question3\">\n" +
+            "                                           <input type=\"hidden\" name=\"questions_ids\" value=\""+data.id+"\">\n" +
+            "                                            <h4 class=\"text-info\">"+data.question_type+"</h4>\n" +
+            "                                            <h3>"+data.question_title+"</h3>\n" +
+            "                                            <div class=\"ml-md-auto py-2 py-md-0\">\n" +
+            "                                                <a href=\"/question/edit?id="+data.id+"\" class=\"btn btn-danger\">修改</a>\n" +
+            "                                                <button class='btn btn-danger' onclick='divRemote(this)' ><i class=\"la flaticon-cross\"></i></button>\n" +
+            "                                            </div>\n" +
+            "                                        </div>\n" +
+            "                                        <div class=\"custom-control custom-checkbox\">\n" +
+            "                                            <ul id='ul-options'>"+rs+"</ul>\n" +
+            "                                        </div>\n" +
+            "                                        <h4>解析：<span >"+data.question_analysis+"</span></h4>\n" +
+            "                                        <h4>说明：</h4>\n" +
+            "                                        <div class=\"form-group form-inline\">\n" +
+            "                                            <label for=\"score-1\">分数:</label>\n" +sc+
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </div>";
+        container.parentNode.insertBefore(oDiv, node)
+        node=oDiv.nextSibling;
+
+    }
+    function divRemote(test){
+        test.parentNode.parentNode.parentNode.parentNode.removeChild(test.parentNode.parentNode.parentNode);
+    }
+    //设置分数
+    function setScore(data){
+        var score=document.getElementById('setScore').value;
+        switch (data) {
+            case 1 :
+                $("[id=score-1]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 2 :
+                $("[id=score-2]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 3 :
+                $("[id=score-3]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 4 :
+                $("[id=score-4]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 5 :
+                $("[id=score-1]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-2]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-3]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-4]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+
+        };
+    }
+
+    function addTestPaper() {
+        var data1=$("#testPaper-head-data").serialize()+"&"+$("#testPaper-body-data").serialize();
+        $.get("/testPaper/add",data1,function (data) {
+            if(data.msg=="OK"){
+                alert("成功");
+                window.location.reload();
+            }
+
+        })
+
+    }
+
+
+</script>
+</body>
+</html>

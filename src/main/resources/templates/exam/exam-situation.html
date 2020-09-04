@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>考试管理</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">考试情况</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">考试管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">考试操作</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header"  >
+                                        <div class="span-title">
+                                            <h3 th:text="${exam.exam_name}">2020-2-22测试试卷</h3>
+                                        </div>
+                                        <div class="span-mode"></div>
+                                    </div>
+                                        <div class="card-body" >
+                                            <table class="table table-striped  table-head-bg-info mt-4">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">学号</th>
+                                                        <th scope="col">姓名</th>
+                                                        <th scope="col">班级</th>
+                                                        <th scope="col">考试状态</th>
+                                                        <th scope="col">剩余时长</th>
+                                                        <th scope="col">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="userExam:${userExams}" >
+                                                        <td th:text="${userExam.id}">10001</td>
+                                                        <td th:text="${userExam.user_id}">admin</td>
+                                                        <td th:text="${oesClass.class_name}">2020-2-22</td>
+                                                        <td >
+                                                            <span th:if="${userExam.status==0}" class="badge badge-danger">未领卷</span>
+                                                            <span th:if="${userExam.status==1}" class="badge badge-success">已交卷</span>
+                                                            <span th:if="${userExam.status==2}" class="badge badge-info">考试中</span>
+                                                        </td>
+                                                        <td th:text="${userExam.duration}">45</td>
+
+                                                        <td >
+                                                            <a class="btn btn-primary btn-sm" th:if="${userExam.status==1}" th:href="@{/exam/correction}"  ><i class="fas fa-marker">&nbsp;</i>批改试卷</a>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script th:inline="javascript">
+
+    function correctionAction() {
+        var option_id=$("input[name='option_id']");
+        var score=$("input[name='score']");
+
+        var scoreData=$("#scoreForm").serialize();
+        $.get("/correction/Manual",scoreData,function (data) {
+            if (data=="OK"){
+                alert("批改成功！");
+                window.location.reload();
+            }
+        })
+    }
+
+
+</script>
+</body>
+</html>

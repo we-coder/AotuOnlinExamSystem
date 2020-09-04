@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h2 class="text-white pb-2 fw-bold">公告</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner mt--5">
+                <div class="row mt--2">
+                    <div class="col-md-12">
+                        <div class="card full-height">
+                            <div class="card-header text-center">
+                                <h1 class="text-danger" th:text="${notice.title}"></h1>
+                                <div >
+                                    <span><i class="fas fa-user-cog"></i><small th:text="${notice.create_id}"></small></span>
+                                    &nbsp;
+                                    <span><i class="far fa-calendar-alt"></i><small th:text="${notice.create_date}"> </small></span>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 th:text="${notice.content}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>

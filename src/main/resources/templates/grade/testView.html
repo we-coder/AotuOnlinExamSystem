@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>试卷情况查看</title>
+    <link th:href="@{/paper/main.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/paper/iconfont.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/paper/test.css}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .hasBeenAnswer {
+            background: #5d9cec;
+            color:#fff;
+        }
+
+        .red{color: #52bef7
+        }
+        .red2{color: #f71416
+        }
+        .option-answer{
+            background: #d6d6d6;
+            color:#FFF
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="main">
+    <!--nr start-->
+    <div class="test_main">
+        <div class="nr_left">
+            <div class="test">
+                <div class="test_title">
+                    <p class="test_time">
+                        <i class="fas fa-hourglass-half"></i><b  th:text="${exam.exam_name}">01:50:00</b>
+                    </p>
+                    <span >时间：<strong th:text="${exam.duration}">考试名：</strong></span>
+                    <span >班级：<strong th:text="${className}">考试名：</strong></span>
+                    <span >姓名：<strong th:text="${stuName}">考试名：</strong></span>
+                </div>
+                <form action="" method="post">
+
+                    <div id="question" >
+                        <div th:if="${not #lists.isEmpty(question1)}">
+                            <div class="test_content" >
+                                <div class="test_content_title">
+
+                                    <h2>单选题</h2>
+                                    <p th:each="question,questionStat:${question1}" th:if="${questionStat.last}">
+                                        <span>共</span><i class="content_lit"  th:text="${questionStat.count}" >60</i><span>题，</span><span>每题</span><i class="content_fs" th:text="${question.question_subject}">60</i><span>分</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="test_content_nr" >
+                                <ul>
+                                    <li th:each="question,questionStat:${question1}"  th:id="'qu_1_'+${questionStat.index}">
+                                        <div class="test_content_nr_tt">
+                                            <i th:text="${questionStat.count}">题号</i><h3><span th:text="${question.question_title}">题干</span></h3><b th:each="achievement:${achievements}" th:if="${achievement.question_id}==${question.id}" th:text="${achievement.score}">10</b>
+                                        </div>
+                                        <div class="test_content_nr_main">
+                                            <ul>
+                                                <li  th:each="option,optStat:${question.options}" >
+
+                                                    <div th:each="opt:${answerSheets}" th:if="${opt.option_id}==${option.opt_id}"   th:class="${opt.opt_status==0}?'option':'option option-answer '">
+                                                        <input type="radio" disabled class="radioOrCheck" th:if="${option.opt_status==1}" checked="checked" th:name="'1-answer'+${questionStat.count}" th:id="'1_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                        <input type="radio" disabled class="radioOrCheck" th:if="${option.opt_status==0}"  th:name="'1-answer'+${questionStat.count}" th:id="'1_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                        <label th:for="'1_answer_'+${questionStat.count}+'_option_'+${optStat.count}">
+                                                            <p class="ue red" style="display: inline;" th:if="${option.opt_status==1}" th:text="${option.opt_content}">选项</p>
+                                                            <p class="ue" style="display: inline;" th:if="${option.opt_status==0}" th:text="${option.opt_content}">选项1</p>
+                                                        </label>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                            <div>
+                                                <h3 >解析：<span th:text="${question.question_analysis}">8484545</span></h3>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(question2)}">
+                        <div class="test_content" >
+                            <div class="test_content_title">
+                                <h2>多选题</h2>
+                                <p th:each="question,questionStat:${question2}" th:if="${questionStat.last}">
+                                    <span>共</span><i class="content_lit"  th:text="${questionStat.count}" >30</i><span>题，</span><span>每题</span><i class="content_fs" th:text="${question.question_subject}">30</i><span>分</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="test_content_nr" >
+                            <ul >
+                                <li th:each="question,questionStat:${question2}"  th:id="'qu_2_'+${questionStat.index}" >
+                                    <div class="test_content_nr_tt">
+                                        <i th:text="${questionStat.count}">题号</i><h3><span th:text="${question.question_title}">题干</span></h3><b th:each="achievement:${achievements}" th:if="${achievement.question_id}==${question.id}" th:text="${achievement.score}">10</b>
+                                    </div>
+                                    <div class="test_content_nr_main">
+                                        <ul>
+                                            <li class="option"  th:each="option,optStat:${question.options}">
+                                                <div th:each="opt:${answerSheets}" th:if="${opt.option_id}==${option.opt_id}"   th:class="${opt.opt_status==0}?'option':'option option-answer '">
+                                                    <input type="checkbox" disabled class="radioOrCheck" th:if="${option.opt_status==1}" checked="checked" th:name="'answer'+${questionStat.count}" th:id="'2_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                    <input type="checkbox" disabled class="radioOrCheck" th:if="${option.opt_status==0}" th:name="'answer'+${questionStat.count}" th:id="'2_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                    <label th:for="'2_answer_'+${questionStat.count}+'_option_'+${optStat.count}">
+                                                        <p class="ue red" disabled style="display: inline;" th:if="${option.opt_status==1}" th:text="${option.opt_content}">选项</p>
+                                                        <p class="ue" disabled style="display: inline;" th:if="${option.opt_status==0}" th:text="${option.opt_content}">选项</p>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <h3 >解析：<span th:text="${question.question_analysis}">8484545</span></h3>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(question3)}">
+                        <div class="test_content" >
+                            <div class="test_content_title">
+                                <h2>判断题</h2>
+                                <p th:each="question,questionStat:${question3}" th:if="${questionStat.last}">
+                                    <span>共</span><i class="content_lit"  th:text="${questionStat.count}" >30</i><span>题，</span><span>每题</span><i class="content_fs" th:text="${question.question_subject}">30</i><span>分</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="test_content_nr" >
+                            <ul >
+
+                                <li th:each="question,questionStat:${question3}"  th:id="'qu_3_'+${questionStat.index}" >
+                                    <div class="test_content_nr_tt">
+                                        <i th:text="${questionStat.count}">题号</i><h3><span th:text="${question.question_title}">题干</span></h3><b th:each="achievement:${achievements}" th:if="${achievement.question_id}==${question.id}" th:text="${achievement.score}">10</b>
+                                    </div>
+
+                                    <div class="test_content_nr_main">
+                                        <ul>
+
+                                            <li class="option"  th:each="option,optStat:${question.options}">
+                                                <div th:each="opt:${answerSheets}" th:if="${opt.option_id}==${option.opt_id}"   th:class="${opt.opt_status==0}?'option':'option option-answer '">
+                                                    <input type="radio" disabled class="radioOrCheck" th:if="${option.opt_status==1}" checked="checked" th:name="'3-answer'+${questionStat.count}" th:id="'3_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                    <input type="radio" disabled class="radioOrCheck" th:if="${option.opt_status==0}"  th:name="'3-answer'+${questionStat.count}" th:id="'3_answer_'+${questionStat.count}+'_option_'+${optStat.count}"/>
+                                                    <label th:for="'3_answer_'+${questionStat.count}+'_option_'+${optStat.count}">
+                                                        <p class="ue" style="display: inline;" th:if="${option.opt_status==0}" th:text="${option.opt_content}">选项</p>
+                                                        <p class="ue red" style="display: inline;" th:if="${option.opt_status==1}" th:text="${option.opt_content}">选项</p>
+                                                    </label>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <div>
+                                            <h3 >解析：<span th:text="${question.question_analysis}">8484545</span></h3>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(question4)}">
+                        <div class="test_content" >
+                            <div class="test_content_title">
+                                <h2>主观题</h2>
+                                <p th:each="question,questionStat:${question4}" th:if="${questionStat.last}">
+                                    <span>共</span><i class="content_lit"  th:text="${questionStat.count}" >30</i><span>题，</span><span>每题</span><i class="content_fs" th:text="${question.question_subject}">30</i><span>分</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="test_content_nr" >
+                            <ul >
+                                <li th:each="question,questionStat:${question4}"  th:id="'qu_4_'+${questionStat.index}" >
+                                    <div class="test_content_nr_tt">
+                                        <i th:text="${questionStat.count}">题号</i><h3><span th:text="${question.question_title}" >题干</span></h3><b th:each="achievement:${achievements}" th:if="${achievement.question_id}==${question.id}" th:text="${achievement.score}">10</b>
+                                    </div>
+                                    <div class="test_content_nr_main">
+                                        <ul>
+
+                                            <li class="option"  th:each="option,optStat:${question.options}">
+                                                <div th:each="opt:${answerSheets}" th:if="${opt.option_id}==${option.opt_id}">
+                                                    <h3   >学生答案：<span th:text="${opt.answer}"></span></h3>
+                                                </div>
+                                                <h3 >参考答案：<span class="red" th:text="${option.opt_content}">8484545</span></h3>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <h3 >解析：<span th:text="${question.question_analysis}">8484545</span></h3>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="nr_right">
+            <div class="nr_rt_main">
+                <div class="rt_nr1">
+                    <div class="rt_nr1_title">
+                        <h1>
+                            <i class="icon iconfont">&#xe692;</i>答题卡
+                        </h1>
+                        <p class="test_time">
+                            <i class="icon iconfont">总分</i><b class="red2" th:text="${score.grade}"></b>
+                        </p>
+                    </div>
+
+                    <div class="rt_content" th:if="${not #lists.isEmpty(question1)}">
+                        <div class="rt_content_tt">
+                            <h2>单选题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit" th:each="question,questionStat:${question1}" th:text="${questionStat.count}" th:if="${questionStat.last}">60</i><span>题</span>
+                            </p>
+                        </div>
+                        <div class="rt_content_nr answerSheet">
+                            <ul>
+
+                                <li th:each="question,questionStat:${question1}"><a th:href="@{'#qu_1_'+${questionStat.index}}" th:text="${questionStat.count}">1</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rt_content" th:if="${not #lists.isEmpty(question2)}">
+                        <div class="rt_content_tt">
+                            <h2>多选题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit" th:each="question,questionStat:${question2}" th:text="${questionStat.count}" th:if="${questionStat.last}">30</i><span>题</span>
+                            </p>
+                        </div>
+                        <div class="rt_content_nr answerSheet">
+                            <ul>
+
+                                <li th:each="question,questionStat:${question2}"><a th:href="@{'#qu_2_'+${questionStat.index}}" th:text="${questionStat.count}">1</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rt_content" th:if="${not #lists.isEmpty(question3)}">
+                        <div class="rt_content_tt">
+                            <h2>判断题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit" th:each="question,questionStat:${question3}" th:text="${questionStat.count}" th:if="${questionStat.last}">30</i><span>题</span>
+                            </p>
+                        </div>
+                        <div class="rt_content_nr answerSheet">
+                            <ul>
+
+                                <li th:each="question,questionStat:${question3}"><a th:href="@{'#qu_3_'+${questionStat.index}}" th:text="${questionStat.count}">1</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rt_content" th:if="${not #lists.isEmpty(question4)}">
+                        <div class="rt_content_tt">
+                            <h2>主观题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit" th:each="question,questionStat:${question4}" th:text="${questionStat.count}" th:if="${questionStat.last}">30</i><span>题</span>
+                            </p>
+                        </div>
+                        <div class="rt_content_nr answerSheet">
+                            <ul>
+
+                                <li th:each="question,questionStat:${question4}"><a th:href="@{'#qu_4_'+${questionStat.index}}" th:text="${questionStat.count}">1</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--nr end-->
+    <div class="foot"></div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/paper/jquery.easy-pie-chart.js}"></script>
+<!--时间js-->
+<script th:src="@{/paper/time/jquery.countdown.js}"></script>
+<script>
+    window.jQuery(function($) {
+        "use strict";
+
+        $('time').countDown({
+            with_separators : false
+        });
+        $('.alt-1').countDown({
+            css_class : 'countdown-alt-1'
+        });
+        $('.alt-2').countDown({
+            css_class : 'countdown-alt-2'
+        });
+
+    });
+
+
+    $(function() {
+        $('li.option label').click(function() {
+        debugger;
+            var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
+            var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+            // 设置已答题
+            if(!cardLi.hasClass('hasBeenAnswer')){
+                cardLi.addClass('hasBeenAnswer');
+            }
+
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

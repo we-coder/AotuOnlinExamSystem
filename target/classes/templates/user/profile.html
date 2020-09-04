@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <style type="text/css">
+        .con4{
+            width: 300px;
+            height: auto;
+            overflow: hidden;
+            margin: 20px auto;
+            color: #FFFFFF;
+        }
+        .con4 .btn{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #d8b49c;
+            display: block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .upload{
+            float: left;
+            position: relative;
+        }
+        .upload_pic{
+            display: block;
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            border-radius: 5px;
+        }
+        #cvs{
+            border: 1px solid #000;
+            margin:20px 0 20px 50px;
+        }
+    </style>
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">个人资料</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">用户管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">查看资料</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card ">
+                    <div class="card-header">
+                        <h3>个人信息</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row col-md-12">
+                            <div class="col-md-4">
+                                <h3>头像</h3>
+                                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                                <div class="avatar-xxl" title="点击换头像">
+                                    <a ><img th:src="'/uploadfile/user/icon/'+${session.USER_SESSION.user_icon}" alt="..." class="avatar-img "></a>
+                                </div>
+
+                                <form id="ufile" enctype="multipart/form-data">
+                                    <input  type="file" id="uploadfile" name="uploadfile" multiple="multiple" /><br />
+                                </form>
+                                <button class="btn btn-primary" onclick="updateImage()">修改头像</button>
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">详细信息</h5>
+                                <h5 class="card-text">ID：<span class="text-info" th:text="${session.USER_SESSION.id}">10001</span></h5>
+                                <h5 class="card-text">用户名：<span class="text-info" th:text="${session.USER_SESSION.username}">小军</span></h5>
+                                <h5 class="card-text">昵称：<span class="text-info" th:text="${session.USER_SESSION.nickname}">小军</span></h5>
+                                <h5 class="card-text">邮箱：<span class="text-info" th:text="${session.USER_SESSION.email}">1799772817@qq.com</span></h5>
+                                <h5 class="card-text">权限：<span class="text-info" th:text="${session.USER_SESSION.username}">教师</span></h5>
+                                <h5 class="card-text">用户级别：<span class="text-info" th:text="${session.USER_SESSION.username}">二级管理员</span></h5>
+                                <h5 class="card-text">联系方式：<span class="text-info" th:text="${session.USER_SESSION.tel}">广东东莞</span></h5>
+                                <h5 class="card-text">性别：<span class="text-info" th:text="${session.USER_SESSION.sex}">广东东莞</span></h5>
+                                <h5 class="card-text">地址：<span class="text-info" th:text="${session.USER_SESSION.address}">广东东莞</span></h5>
+                                <h5 class="card-text">注册时间：<span class="text-info" th:text="${#strings.substring(session.USER_SESSION.create_date,0,19)}">2019.11.11</span></h5>
+                                <h5 class="card-text">最后修改时间：<span class="text-info" th:text="${session.USER_SESSION.modify_date}">2019.11.11</span></h5>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getUserData()" data-target="#modal-profile">
+                                    修改个人信息
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade " id="modal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">修改资料</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="user-edit-data">
+                                        <input type="hidden" name="id" th:value="${session.USER_SESSION.id}">
+
+                                    <div class="form-group form-inline">
+                                        <label for="edit-nickname" class="col-md-3 col-form-label">昵称</label>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" class="form-control input-full" name="nickname" th:value="${session.USER_SESSION.nickname}" id="edit-nickname" placeholder="请输入">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-inline">
+                                        <label for="edit-email" class="col-md-3 col-form-label">邮箱</label>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" class="form-control input-full" name="email" th:value="${session.USER_SESSION.email}" id="edit-email" placeholder="请输入">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group form-inline">
+                                        <label for="edit-tel" class="col-md-3 col-form-label">电话</label>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" class="form-control input-full" id="edit-tel" name="tel" th:value="${session.USER_SESSION.tel}" placeholder="请输入">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-inline">
+                                        <label for="edit-address" class="col-md-3 col-form-label">地址</label>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" class="form-control input-full" id="edit-address" name="address" th:value="${session.USER_SESSION.address}" placeholder="请输入">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-inline">
+                                        <label for="edit-sex" class="col-md-3 col-form-label">性别</label>
+                                        <div class="col-md-9 p-0">
+                                            <select class="form-control" id="edit-sex" name="sex">
+                                                <option value="" th:selected="${session.USER_SESSION.sex}==''" >请选择</option>
+                                                <option value="男" th:selected="${session.USER_SESSION.sex}=='男'">男</option>
+                                                <option value="女" th:selected="${session.USER_SESSION.sex}=='女'">女</option>
+                                                <option value="保密" th:selected="${session.USER_SESSION.sex}=='保密'">保密</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" onclick="userProfile()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script >
+    function getUserData() {
+        $.get("/user/update",$("#user-edit-data").serialize(),function (data) {
+            if(data.msg=="OK"){
+                $("#edit-nickname").val(data.nickname);
+                $("#edit-address").val(data.address);
+                $("#edit-sex").val(data.sex);
+                $("#edit-tel").val(data.tel);
+                $("#edit-email").val(data.email);
+            }
+        })
+
+
+    }
+function userProfile(){
+
+    $.get("/user/update",$("#user-edit-data").serialize(),function (data) {
+
+        if(data=="OK"){
+            alert("修改成功");
+            window.location.reload();
+
+        }else{
+            alert("修改失败，请重试！");
+            window.location.reload();
+
+        }
+    })
+}
+
+    // 执行修改客户操作
+    // var header=$("#meta[name='_csrf_header']").attr("content");
+    // var token=$("#meta[name='_csrf']").attr("content");
+
+
+    function updateImage() {
+        var formData = new FormData($('#ufile')[0]);//获取表单中的文件
+        console.log(formData);
+        if($('#uploadfile').get(0).files[0]) {
+            $.ajax({
+                url: "/user/fileUpload",//后台的接口地址
+                type: "post",//get请求方式
+                data: formData,//参数
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data == "OK") {
+                        alert("头像更新成功！");
+                        window.location.reload();
+                    } else {
+                        alert("头像更新失败！");
+                        window.location.reload();
+                    }
+                }
+            })
+        }else {
+            alert("您还没有选择图片，请选择格式为jpg，png，jpeg，gif的图片（大小为10MB以下）")
+        }
+    }
+
+</script>
+</body>
+</html>

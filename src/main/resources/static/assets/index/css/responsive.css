@@ -1,0 +1,1805 @@
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    /* banner */
+    .banner .banner-content h1 {
+        font-size: 36px;
+    }
+
+    /* inventor */
+    .inventor .part-inventor {
+        height: 220px;
+    }
+    .inventor .part-inventor .single-inventor {
+        padding: 10px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(2) {
+        right: 130px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(3) {
+        top: 130px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(4) {
+        right: 160px;
+        top: 110px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(5) {
+        top: 130px;
+        right: 260px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(5) img {
+        width: 50px;
+    }
+
+    /* blog post page */
+    .blog-post .single-blog .part-social a:last-child {
+        display: none;
+    } 
+    
+    /* page title */
+    .page-title {
+        background-color: #6e3ddd;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* section title */
+    .section-title h2,
+    .we-thinking-global .part-text h2,
+    .inventor .part-text h2,
+    .info-feature .info-single-feature .part-text h2 {
+        font-size: 28px;
+    }
+
+    /* header */
+    .header {
+        position: relative;
+        border-bottom: none;
+    }
+    .header.nav-fixed {
+        background: #fff;
+    }
+    .header .mobile-header {
+        background: #6b39da;
+        padding: 10px 30px;
+        position: relative;
+    }
+    .header .mobile-header:after {
+        position: absolute;
+        content: '';
+        left: -136px;
+        top: 0;
+        right: -136px;
+        height: 100%;
+        background: #6b39da;
+        z-index: -1;
+    }
+    .header button {
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        line-height: 35px;
+        position: relative;
+        right: 0;
+        float: right;
+        outline: none;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item .nav-link {
+        color: #6a39da;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(106, 57, 218, 0.23);
+        text-align: left;
+        display: block;
+        background: #fff;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .header .login {
+        display: none;
+    }
+    .min-height-none {
+        min-height: 0;
+    }
+
+    /* banner */
+    .banner {
+        padding: 93px 0 100px;
+        background-position: center center;
+        background-size: auto;
+    }
+    .banner .banner-content h1 {
+        font-size: 28px;
+    }
+    .banner .banner-content p br {
+        display: none;
+    }
+
+    /* info-feature */
+    .info-feature {
+        margin-top: 0;
+        padding: 80px 0 50px;
+    }
+    .info-feature .info-single-feature {
+        margin-bottom: 30px;
+    }
+
+    /* litehyip feature */
+    .litehyip-features {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+    .litehyip-features .single-feature {
+        margin-bottom: 35px;
+    }
+
+    /* we thinking global */
+    .we-thinking-global {
+        padding: 80px 0;
+    }
+    .we-thinking-global .part-text h2 {
+        line-height: 1.4;
+    }
+    .we-thinking-global .part-img  {
+        display: none;
+    }
+
+    /* inventor */
+    .inventor {
+        margin-top: 0;
+        background: #6b39da;
+        padding: 80px 0 50px;
+    }
+    .inventor .part-text {
+        margin-bottom: 54px;
+    }
+    .inventor .part-text h2 {
+        margin-top: -6px;
+    }
+    .inventor .bg-img {
+        display: none;
+    }
+    .inventor .part-inventor {
+        height: auto;
+    }
+    .inventor .part-inventor .single-inventor {
+        position: initial;
+        display: block;
+        margin-bottom: 30px;
+        padding: 40px;
+        width: calc(50% - 15px);
+        float: right;
+        margin-right: 30px;
+    }
+    .inventor .part-inventor .single-inventor:nth-child(1),
+    .inventor .part-inventor .single-inventor:nth-child(3) {
+        margin-right: 0;
+    }
+    .inventor .part-inventor .single-inventor img {
+        width: 100%!important;
+        padding: 20px;
+        border-radius: 50%;
+    }
+
+    /* testimonial */
+    .testimonial {
+        padding: 73px 0 79px;
+    }
+
+    /* newsletter */
+    .newsletter {
+        padding: 74px 0 80px;
+        background: #6b39da;
+    }
+    .newsletter .bg-img {
+        display: none;
+    }
+
+    /* page title */
+    .page-title {
+        padding: 74px 0 60px;
+        background-color: #7949ed;
+    }
+    .page-title .page-title-content h1 {
+        font-size: 28px;
+    }
+    .page-title .page-title-content p {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* about page > video */
+    .video {
+        margin-top: 0;
+        padding: 73px 0 58px;
+    }
+    .video .part-video {
+        border-radius: 0;
+    }
+    .video .part-video a.play-button {
+        font-size: 26px;
+        border: 6px solid rgb(26, 221, 150);
+        line-height: 60px;
+    }
+
+    /* about page > info-feature */
+    .info-feature.about-page .bg-img {
+        display: none;
+        padding: 80px 0 50px;
+    }
+    .info-feature.about-page {
+        margin-top: 0;
+        background: #7949ed;
+        padding: 80px 0 50px;
+    }
+
+    /* about-page > litehyip feature */
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+
+    /* about-page > inventor */
+    .inventor.about-page .part-text h2,
+    .inventor.about-page .part-text p {
+        color: #fff;
+    }
+
+    /* about-page footer */
+    .footer.about-page {
+        margin-top: 0;
+    }
+
+    /* investment page > transaction */
+    .transaction {
+        padding: 73px 0 80px;
+        margin-top: 0;
+    }
+    .transaction-area .table {
+        width: 900px;
+    }
+    .transaction-area .tab-pane {
+        overflow-y: hidden;
+        overflow-x: scroll;  
+    }
+    .transaction .transaction-area .nav-tabs {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item .nav-link {
+        margin-right: 0;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:first-child .nav-link {
+        border-radius: 50px 0 0 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:last-child .nav-link {
+        border-radius: 0 50px 50px 0;
+    }
+    .transaction .transaction-area .tab-content .table thead th {
+        font-size: 16px;
+    }
+    .transaction .transaction-area .tab-content .table tbody tr th .user-img {
+        display: none;
+    }
+
+    /* investment page > pricing */
+    .pricing {
+        background: #f3f6ff;
+        padding: 72px 0 42px;
+    }
+    .pricing .section-title {
+        margin-bottom: 58px;
+    }
+    .pricing .section-title h2,
+    .pricing .section-title p {
+        color: #455164;
+    }
+    .pricing .bg-img {
+        display: none;
+    }
+    .pricing .single-plan {
+        margin-top: 0;
+        margin-bottom: 70px;
+    }
+    .pricing .feature-bar {
+        display: none;
+    }
+
+    /* investment page > payment */
+    .payment {
+        padding: 84px 0 80px;
+    }
+    .payment .part-form h3 {
+        font-size: 22px;
+    }
+    .payment .part-form .payment-form .form-group label {
+        font-size: 16px;
+    }
+    .payment .part-accept .single-accept {
+        float: none;
+    }
+
+    /* investment page > footer */
+    .footer.investment-page {
+        padding: 78px 0 00px;
+    } 
+    
+    /* faq page */
+    .faq {
+        padding: 74px 0 50px;
+        margin-top: 0;
+    }
+
+    /* blog post page */
+    .blog-post {
+        margin-top: 0;
+        padding: 80px 0 50px;
+        background: #f1f4fd;
+    }
+    .blog-post .bg-img {
+        display: none;
+    }
+    .blog-post .single-blog .part-social a:last-child {
+        display: none;
+    }
+    .blog-post.single-blog-post {
+        padding-top: 80px;
+    }
+
+    /* contact page */
+    .contact {
+        margin-top: 0;
+        padding: 73px 0 80px;
+    }
+    .contact .contact-form button.submit-button {
+        margin-left: -80px;
+    }
+
+
+    /* footer */
+    .footer {
+        margin-top: 0;
+        padding: 77px 0 0px;
+    }
+    .footer .social {
+        margin-bottom: 40px;
+    }
+    .footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        margin-top: 42px;
+    }
+    .footer .copyright p {
+        margin-bottom: 0;
+    }
+    .footer .links {
+        margin-bottom: 25px;
+    }
+    .footer .address li {
+        padding: 4px 0;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    /* section title */
+    .section-title h2,
+    .we-thinking-global .part-text h2,
+    .inventor .part-text h2,
+    .info-feature .info-single-feature .part-text h2 {
+        font-size: 28px;
+    }
+
+    /* header */
+    .header {
+        position: relative;
+        border-bottom: none;
+    }
+    .header.nav-fixed {
+        background: #fff;
+    }
+    .header .mobile-header {
+        background: #6b39da;
+        padding: 10px 30px;
+        position: relative;
+    }
+    .header .mobile-header:after {
+        position: absolute;
+        content: '';
+        left: -115px;
+        top: 0;
+        right: -115px;
+        height: 100%;
+        background: #6b39da;
+        z-index: -1;
+    }
+    .header button {
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        line-height: 35px;
+        position: relative;
+        right: 0;
+        float: right;
+        outline: none;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item .nav-link {
+        color: #6a39da;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(106, 57, 218, 0.23);
+        text-align: left;
+        display: block;
+        background: #fff;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .header .login {
+        display: none;
+    }
+    .min-height-none {
+        min-height: 0;
+    }
+
+    /* banner */
+    .banner {
+        padding: 93px 0 100px;
+        background-position: center center;
+        background-size: auto;
+    }
+    .banner .banner-content h1 {
+        font-size: 28px;
+    }
+    .banner .banner-content p br {
+        display: none;
+    }
+
+    /* info-feature */
+    .info-feature {
+        margin-top: 0;
+        padding: 80px 0 50px;
+    }
+    .info-feature .info-single-feature {
+        margin-bottom: 30px;
+    }
+
+    /* litehyip feature */
+    .litehyip-features {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+    .litehyip-features .single-feature {
+        margin-bottom: 35px;
+    }
+
+    /* we thinking global */
+    .we-thinking-global {
+        padding: 80px 0;
+    }
+    .we-thinking-global .part-text h2 {
+        line-height: 1.4;
+    }
+    .we-thinking-global .part-img  {
+        margin-bottom: 31PX;
+    }
+
+    /* inventor */
+    .inventor {
+        margin-top: 0;
+        background: #6b39da;
+        padding: 80px 0 50px;
+    }
+    .inventor .part-text {
+        margin-bottom: 54px;
+    }
+    .inventor .part-text h2 {
+        margin-top: -6px;
+    }
+    .inventor .bg-img {
+        display: none;
+    }
+    .inventor .part-inventor {
+        height: auto;
+    }
+    .inventor .part-inventor .single-inventor {
+        position: initial;
+        display: block;
+        margin-bottom: 30px;
+        padding: 40px;
+    }
+    .inventor .part-inventor .single-inventor img {
+        width: 100%!important;
+        padding: 20px;
+        border-radius: 50%;
+    }
+
+    /* testimonial */
+    .testimonial {
+        padding: 73px 0 79px;
+    }
+
+    /* newsletter */
+    .newsletter {
+        padding: 74px 0 80px;
+        background: #6b39da;
+    }
+    .newsletter .bg-img {
+        display: none;
+    }
+
+    /* page title */
+    .page-title {
+        padding: 74px 0 60px;
+        background-color: #7949ed;
+    }
+    .page-title .page-title-content h1 {
+        font-size: 28px;
+    }
+    .page-title .page-title-content p {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* about page > video */
+    .video {
+        margin-top: 0;
+        padding: 73px 0 58px;
+    }
+    .video .part-video {
+        border-radius: 0;
+    }
+    .video .part-video a.play-button {
+        font-size: 26px;
+        border: 6px solid rgb(26, 221, 150);
+        line-height: 60px;
+    }
+
+    /* about page > info-feature */
+    .info-feature.about-page .bg-img {
+        display: none;
+        padding: 80px 0 50px;
+    }
+    .info-feature.about-page {
+        margin-top: 0;
+        background: #7949ed;
+        padding: 80px 0 50px;
+    }
+
+    /* about-page > litehyip feature */
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+
+    /* about-page > inventor */
+    .inventor.about-page .part-text h2,
+    .inventor.about-page .part-text p {
+        color: #fff;
+    }
+
+    /* about-page footer */
+    .footer.about-page {
+        margin-top: 0;
+    }
+
+    /* investment page > transaction */
+    .transaction {
+        padding: 73px 0 80px;
+        margin-top: 0;
+    }
+    .transaction-area .table {
+        width: 900px;
+    }
+    .transaction-area .tab-pane {
+        overflow-y: hidden;
+        overflow-x: scroll;  
+    }
+    .transaction .transaction-area .nav-tabs {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item .nav-link {
+        margin-right: 0;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:first-child .nav-link {
+        border-radius: 50px 0 0 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:last-child .nav-link {
+        border-radius: 0 50px 50px 0;
+    }
+    .transaction .transaction-area .tab-content .table thead th {
+        font-size: 16px;
+    }
+    .transaction .transaction-area .tab-content .table tbody tr th .user-img {
+        display: none;
+    }
+
+    /* investment page > pricing */
+    .pricing {
+        background: #f3f6ff;
+        padding: 72px 0 42px;
+    }
+    .pricing .section-title {
+        margin-bottom: 58px;
+    }
+    .pricing .section-title h2,
+    .pricing .section-title p {
+        color: #455164;
+    }
+    .pricing .bg-img {
+        display: none;
+    }
+    .pricing .single-plan {
+        margin-top: 0;
+        margin-bottom: 70px;
+    }
+
+    /* investment page > payment */
+    .payment {
+        padding: 84px 0 80px;
+    }
+    .payment .part-form h3 {
+        font-size: 18px;
+    }
+    .payment .part-form {
+        margin-top: 40px;
+    }
+    .payment .part-form .payment-form .form-group label {
+        font-size: 16px;
+    }
+    .payment .part-accept .single-accept {
+        float: none;
+    } 
+
+    /* investment page > footer */
+    .footer.investment-page {
+        padding: 78px 0 00px;
+    } 
+    
+    /* faq page */
+    .faq {
+        padding: 74px 0 50px;
+        margin-top: 0;
+    }
+
+    /* blog post page */
+    .blog-post {
+        margin-top: 0;
+        padding: 80px 0 50px;
+        background: #f1f4fd;
+    }
+    .blog-post .bg-img {
+        display: none;
+    }
+    
+    .blog-post.single-blog-post {
+        padding-top: 80px;
+    }
+
+    /* contact page */
+    .contact {
+        margin-top: 0;
+        padding: 73px 0 80px;
+    }
+    .contact .contact-form {
+        padding: 30px;
+    }
+    .contact .contact-form .form-group input.form-control {
+        height: 50px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    .contact .contact-form button.submit-button {
+        margin-left: -80px;
+    }
+
+    /* footer */
+    .footer {
+        margin-top: 0;
+        padding: 77px 0 0px;
+    }
+    .footer .social {
+        margin-bottom: 40px;
+    }
+    .footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        margin-top: 72px;
+    }
+    .footer .copyright p {
+        margin-bottom: 0;
+    }
+    .footer .links {
+        margin-bottom: 25px;
+    }
+    .footer .address li {
+        padding: 4px 0;
+    }
+}
+
+
+@media only screen and (min-width: 480px) and (max-width: 575px) {
+    /* section title */
+    .section-title h2,
+    .we-thinking-global .part-text h2,
+    .inventor .part-text h2,
+    .info-feature .info-single-feature .part-text h2 {
+        font-size: 28px;
+    }
+
+    /* header */
+    .header {
+        position: relative;
+        border-bottom: none;
+    }
+    .header.nav-fixed {
+        background: #fff;
+    }
+    .header .mobile-header {
+        background: #6b39da;
+        padding: 10px 30px;
+    }
+    .header button {
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        line-height: 35px;
+        position: relative;
+        right: 0;
+        float: right;
+        outline: none;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item .nav-link {
+        color: #6a39da;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(106, 57, 218, 0.23);
+        text-align: left;
+        display: block;
+        background: #fff;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .header .login {
+        display: none;
+    }
+    .min-height-none {
+        min-height: 0;
+    }
+
+    /* banner */
+    .banner {
+        padding: 93px 0 100px;
+        background-position: center center;
+        background-size: auto;
+    }
+    .banner .banner-content h1 {
+        font-size: 28px;
+    }
+    .banner .banner-content p br {
+        display: none;
+    }
+
+    /* info-feature */
+    .info-feature {
+        margin-top: 0;
+        padding: 80px 0 50px;
+    }
+    .info-feature .info-single-feature {
+        margin-bottom: 30px;
+    }
+
+    /* litehyip feature */
+    .litehyip-features {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+    .litehyip-features .single-feature {
+        margin-bottom: 35px;
+    }
+
+    /* we thinking global */
+    .we-thinking-global {
+        padding: 80px 0;
+    }
+    .we-thinking-global .part-text h2 {
+        line-height: 1.4;
+    }
+    .we-thinking-global .part-img  {
+        margin-bottom: 31PX;
+    }
+
+    /* inventor */
+    .inventor {
+        margin-top: 0;
+        background: #6b39da;
+        padding: 80px 0 50px;
+    }
+    .inventor .part-text {
+        margin-bottom: 54px;
+    }
+    .inventor .part-text h2 {
+        margin-top: -6px;
+    }
+    .inventor .bg-img {
+        display: none;
+    }
+    .inventor .part-inventor {
+        height: auto;
+    }
+    .inventor .part-inventor .single-inventor {
+        position: initial;
+        display: block;
+        margin-bottom: 30px;
+        padding: 40px;
+    }
+    .inventor .part-inventor .single-inventor img {
+        width: 100%!important;
+        padding: 20px;
+        border-radius: 50%;
+    }
+
+    /* testimonial */
+    .testimonial {
+        padding: 73px 0 79px;
+    }
+
+    /* newsletter */
+    .newsletter {
+        padding: 74px 0 80px;
+        background: #6b39da;
+    }
+    .newsletter .bg-img {
+        display: none;
+    }
+    .newsletter .newsletter-form input {
+        height: 50px;
+        font-size: 14px;
+        padding-right: 30px;
+        margin-bottom: 20px;
+    }
+    .newsletter .newsletter-form button {
+        position: initial;
+        height: 50px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* page title */
+    .page-title {
+        padding: 74px 0 60px;
+        background-color: #7949ed;
+    }
+    .page-title .page-title-content h1 {
+        font-size: 28px;
+    }
+    .page-title .page-title-content p {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* about page > video */
+    .video {
+        margin-top: 0;
+        padding: 73px 0 58px;
+    }
+    .video .part-video {
+        border-radius: 0;
+    }
+    .video .part-video a.play-button {
+        font-size: 26px;
+        border: 6px solid rgb(26, 221, 150);
+        line-height: 60px;
+    }
+
+    /* about page > info-feature */
+    .info-feature.about-page .bg-img {
+        display: none;
+        padding: 80px 0 50px;
+    }
+    .info-feature.about-page {
+        margin-top: 0;
+        background: #7949ed;
+        padding: 80px 0 50px;
+    }
+
+    /* about-page > litehyip feature */
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+
+    /* about-page > inventor */
+    .inventor.about-page .part-text h2,
+    .inventor.about-page .part-text p {
+        color: #fff;
+    }
+
+    /* about-page footer */
+    .footer.about-page {
+        margin-top: 0;
+    }
+
+    /* investment page > transaction */
+    .transaction {
+        padding: 73px 0 80px;
+        margin-top: 0;
+    }
+    .transaction-area .table {
+        width: 900px;
+    }
+    .transaction-area .tab-pane {
+        overflow-y: hidden;
+        overflow-x: scroll;  
+    }
+    .transaction .transaction-area .nav-tabs {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item .nav-link {
+        margin-right: 0;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:first-child .nav-link {
+        border-radius: 50px 0 0 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:last-child .nav-link {
+        border-radius: 0 50px 50px 0;
+    }
+    .transaction .transaction-area .tab-content .table thead th {
+        font-size: 16px;
+    }
+    .transaction .transaction-area .tab-content .table tbody tr th .user-img {
+        display: none;
+    }
+
+    /* investment page > pricing */
+    .pricing {
+        background: #f3f6ff;
+        padding: 72px 0 42px;
+    }
+    .pricing .section-title {
+        margin-bottom: 58px;
+    }
+    .pricing .section-title h2,
+    .pricing .section-title p {
+        color: #455164;
+    }
+    .pricing .bg-img {
+        display: none;
+    }
+    .pricing .single-plan {
+        margin-top: 0;
+        margin-bottom: 70px;
+    }
+
+    /* investment page > payment */
+    .payment {
+        padding: 84px 0 80px;
+    }
+    .payment .part-form h3 {
+        font-size: 18px;
+    }
+    .payment .part-form {
+        margin-top: 40px;
+    }
+    .payment .part-form .payment-form .form-group label {
+        font-size: 16px;
+    }
+    .payment .part-accept .single-accept {
+        float: none;
+    }
+
+    /* investment page > footer */
+    .footer.investment-page {
+        padding: 78px 0 00px;
+    } 
+
+    /* faq page */
+    .faq {
+        padding: 74px 0 50px;
+        margin-top: 0;
+    }
+
+    /* blog post page */
+    .blog-post {
+        margin-top: 0;
+        padding: 80px 0 50px;
+        background: #f1f4fd;
+    }
+    .blog-post .bg-img {
+        display: none;
+    }
+    
+    .blog-post.single-blog-post {
+        padding-top: 80px;
+    }
+
+    /* contact page */
+    .contact {
+        margin-top: 0;
+        padding: 73px 0 80px;
+    }
+    .contact .contact-form {
+        padding: 20px;
+    }
+    .contact .contact-form .form-group input.form-control {
+        height: 50px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    .contact .contact-form button.submit-button {
+        margin-left: -80px;
+    }
+
+    /* footer */
+    .footer {
+        margin-top: 0;
+        padding: 77px 0 0px;
+    }
+    .footer .social {
+        margin-bottom: 40px;
+    }
+    .footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        margin-top: 72px;
+    }
+    .footer .copyright p {
+        margin-bottom: 0;
+    }
+    .footer .links {
+        margin-bottom: 25px;
+    }
+    .footer .address li {
+        padding: 4px 0;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 479px) {
+    /* section title */
+    .section-title h2,
+    .we-thinking-global .part-text h2,
+    .inventor .part-text h2,
+    .info-feature .info-single-feature .part-text h2 {
+        font-size: 28px;
+    }
+
+    /* header */
+    .header {
+        position: relative;
+        border-bottom: none;
+    }
+    .header.nav-fixed {
+        background: #fff;
+    }
+    .header .mobile-header {
+        background: #6b39da;
+        padding: 10px 30px;
+    }
+    .header button {
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        line-height: 35px;
+        position: relative;
+        right: 0;
+        float: right;
+        outline: none;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item .nav-link {
+        color: #6a39da;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(106, 57, 218, 0.23);
+        text-align: left;
+        display: block;
+        background: #fff;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .header .login {
+        display: none;
+    }
+    .min-height-none {
+        min-height: 0;
+    }
+
+    /* banner */
+    .banner {
+        padding: 93px 0 100px;
+        background-position: center center;
+        background-size: auto;
+    }
+    .banner .banner-content h1 {
+        font-size: 36px;
+    }
+    .banner .banner-content p br {
+        display: none;
+    }
+
+    /* info-feature */
+    .info-feature {
+        margin-top: 0;
+        padding: 80px 0 50px;
+    }
+    .info-feature .info-single-feature {
+        margin-bottom: 30px;
+    }
+
+    /* litehyip feature */
+    .litehyip-features,
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+    .litehyip-features .single-feature {
+        margin-bottom: 35px;
+    }
+
+    /* we thinking global */
+    .we-thinking-global {
+        padding: 80px 0;
+    }
+    .we-thinking-global .part-text h2 {
+        line-height: 1.4;
+    }
+    .we-thinking-global .part-img  {
+        margin-bottom: 31PX;
+    }
+
+    /* inventor */
+    .inventor {
+        margin-top: 0;
+        background: #6b39da;
+        padding: 80px 0 50px;
+    }
+    .inventor .part-text {
+        margin-bottom: 54px;
+    }
+    .inventor .part-text h2 {
+        margin-top: -6px;
+    }
+    .inventor .bg-img {
+        display: none;
+    }
+    .inventor .part-inventor {
+        height: auto;
+    }
+    .inventor .part-inventor .single-inventor {
+        position: initial;
+        display: block;
+        margin-bottom: 30px;
+    }
+    .inventor .part-inventor .single-inventor img {
+        width: 100%!important;
+        padding: 20px;
+        border-radius: 50%;
+    }
+
+    /* testimonial */
+    .testimonial {
+        padding: 73px 0 79px;
+    }
+
+    /* newsletter */
+    .newsletter {
+        padding: 74px 0 80px;
+        background: #6b39da;
+    }
+    .newsletter .bg-img {
+        display: none;
+    }
+    .newsletter .newsletter-form input {
+        height: 50px;
+        font-size: 14px;
+        padding-right: 30px;
+        margin-bottom: 20px;
+    }
+    .newsletter .newsletter-form button {
+        position: initial;
+        height: 50px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* page title */
+    .page-title {
+        padding: 74px 0 60px;
+        background-color: #7949ed;
+    }
+    .page-title .page-title-content h1 {
+        font-size: 28px;
+    }
+    .page-title .page-title-content p {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* about page > video */
+    .video {
+        margin-top: 0;
+        padding: 73px 0 58px;
+    }
+    .video .part-video {
+        border-radius: 0;
+    }
+    .video .part-video a.play-button {
+        font-size: 26px;
+        border: 6px solid rgb(26, 221, 150);
+        line-height: 60px;
+    }
+
+    /* about page > info-feature */
+    .info-feature.about-page .bg-img {
+        display: none;
+        padding: 80px 0 50px;
+    }
+    .info-feature.about-page {
+        margin-top: 0;
+        background: #7949ed;
+        padding: 80px 0 50px;
+    }
+
+    /* about-page > litehyip feature */
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+
+    /* about-page > inventor */
+    .inventor.about-page .part-text h2,
+    .inventor.about-page .part-text p {
+        color: #fff;
+    }
+
+    /* about-page > footer */
+    .footer.about-page {
+        margin-top: 0;
+    }
+
+    /* investment page > transaction */
+    .transaction {
+        padding: 73px 0 80px;
+        margin-top: 0;
+    }
+    .transaction-area .table {
+        width: 900px;
+    }
+    .transaction-area .tab-pane {
+        overflow-y: hidden;
+        overflow-x: scroll;  
+    }
+    .transaction .transaction-area .nav-tabs {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item .nav-link {
+        margin-right: 0;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:first-child .nav-link {
+        border-radius: 50px 0 0 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:last-child .nav-link {
+        border-radius: 0 50px 50px 0;
+    }
+    .transaction .transaction-area .tab-content .table thead th {
+        font-size: 16px;
+    }
+    .transaction .transaction-area .tab-content .table tbody tr th .user-img {
+        display: none;
+    }
+
+    /* investment page > pricing */
+    .pricing {
+        background: #f3f6ff;
+        padding: 72px 0 42px;
+    }
+    .pricing .section-title {
+        margin-bottom: 58px;
+    }
+    .pricing .section-title h2,
+    .pricing .section-title p {
+        color: #455164;
+    }
+    .pricing .bg-img {
+        display: none;
+    }
+    .pricing .single-plan {
+        margin-top: 0;
+        margin-bottom: 70px;
+    }
+
+    /* investment page > payment */
+    .payment {
+        padding: 84px 0 80px;
+    }
+    .payment .part-form h3 {
+        font-size: 18px;
+    }
+    .payment .part-form {
+        margin-top: 40px;
+    }
+    .payment .part-form .payment-form .form-group label {
+        font-size: 16px;
+    }
+    .payment .part-accept .single-accept {
+        float: left;
+    }
+
+    /* investment page > footer */
+    .footer.investment-page {
+        padding: 78px 0 00px;
+    } 
+
+    /* faq page */
+    .faq {
+        padding: 74px 0 50px;
+        margin-top: 0;
+    }
+    .faq .accordion .card .card-header h5 button {
+        white-space: normal;
+        padding-left: 30px;
+    }
+    .faq .accordion .card .card-body {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .faq .accordion .card .card-header h5 button:after,
+    .faq .accordion .card .card-header h5 button:before {
+        display: none;
+    }
+
+    /* blog post page */
+    .blog-post {
+        margin-top: 0;
+        padding: 80px 0 50px;
+        background: #f1f4fd;
+    }
+    .blog-post .bg-img {
+        display: none;
+    }
+    .blog-post .single-blog .part-social a:last-child {
+        display: none;
+    }
+
+    /* details blog */
+    .blog-post .single-blog.blog-details .part-text h3 {
+        font-size: inherit;
+    } 
+    .blog-post .single-blog.blog-details .part-text h4 span {
+        font-size: 12px;
+    }
+    .blog-post .single-blog.blog-details .part-text p {
+        font-size: 14px;
+        line-height: 26px;
+    }
+    .blog-post.single-blog-post {
+        padding-top: 80px;
+    }
+
+    /* contact page */
+    .contact {
+        margin-top: 0;
+        padding: 73px 0 80px;
+    }
+    .contact .contact-form {
+        padding: 20px;
+    }
+    .contact .contact-form .form-group input.form-control {
+        height: 50px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    .contact .contact-form button.submit-button {
+        margin-left: -80px;
+    }
+    .contact .contact-form .forgetting-password {
+        text-align: left;
+    }
+
+    /* footer */
+    .footer {
+        margin-top: 0;
+        padding: 77px 0 0px;
+    }
+    .footer .social {
+        margin-bottom: 40px;
+    }
+    .footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        margin-top: 72px;
+    }
+    .footer .copyright p {
+        margin-bottom: 0;
+    }
+    .footer .links {
+        margin-bottom: 25px;
+    }
+    .footer .address li {
+        padding: 4px 0;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+    /* section title */
+    .section-title h2,
+    .we-thinking-global .part-text h2,
+    .inventor .part-text h2,
+    .info-feature .info-single-feature .part-text h2 {
+        font-size: 28px;
+    }
+
+    /* header */
+    .header {
+        position: relative;
+        border-bottom: none;
+    }
+    .header.nav-fixed {
+        background: #fff;
+    }
+    .header .mobile-header {
+        background: #6b39da;
+        padding: 10px 30px;
+    }
+    .header button {
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        line-height: 35px;
+        position: relative;
+        right: 0;
+        float: right;
+        outline: none;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item .nav-link {
+        color: #6a39da;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(106, 57, 218, 0.23);
+        text-align: left;
+        display: block;
+        background: #fff;
+    }
+    .header .main-menu .navbar .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    .header .login {
+        display: none;
+    }
+    .min-height-none {
+        min-height: 0;
+    }
+
+    /* banner */
+    .banner {
+        padding: 93px 0 100px;
+        background-position: center center;
+        background-size: auto;
+    }
+    .banner .banner-content h1 {
+        font-size: 28px;
+    }
+    .banner .banner-content p br {
+        display: none;
+    }
+
+    /* info-feature */
+    .info-feature {
+        margin-top: 0;
+        padding: 80px 0 50px;
+    }
+    .info-feature .info-single-feature {
+        margin-bottom: 30px;
+    }
+
+    /* litehyip feature */
+    .litehyip-features,
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+    .litehyip-features .single-feature {
+        margin-bottom: 35px;
+    }
+    .litehyip-features .single-feature .part-text h3 {
+        font-size: 22px;
+    }
+
+    /* we thinking global */
+    .we-thinking-global {
+        padding: 80px 0;
+    }
+    .we-thinking-global .part-text h2 {
+        line-height: 1.4;
+    }
+    .we-thinking-global .part-img  {
+        margin-bottom: 31PX;
+    }
+
+    /* inventor */
+    .inventor {
+        margin-top: 0;
+        background: #6b39da;
+        padding: 80px 0 50px;
+    }
+    .inventor .part-text {
+        margin-bottom: 54px;
+    }
+    .inventor .part-text h2 {
+        margin-top: -6px;
+    }
+    .inventor .bg-img {
+        display: none;
+    }
+    .inventor .part-inventor {
+        height: auto;
+    }
+    .inventor .part-inventor .single-inventor {
+        position: initial;
+        display: block;
+        margin-bottom: 30px;
+    }
+    .inventor .part-inventor .single-inventor img {
+        width: 100%!important;
+        padding: 20px;
+        border-radius: 50%;
+    }
+
+    /* testimonial */
+    .testimonial {
+        padding: 73px 0 79px;
+    }
+
+    /* newsletter */
+    .newsletter {
+        padding: 74px 0 80px;
+        background: #6b39da;
+    }
+    .newsletter .bg-img {
+        display: none;
+    }
+    .newsletter .newsletter-form input {
+        height: 50px;
+        font-size: 14px;
+        padding-right: 30px;
+        margin-bottom: 20px;
+    }
+    .newsletter .newsletter-form button {
+        position: initial;
+        height: 50px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* page title */
+    .page-title {
+        padding: 74px 0 60px;
+        background-color: #7949ed;
+    }
+    .page-title .page-title-content h1 {
+        font-size: 28px;
+    }
+    .page-title .page-title-content p {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* about page > video */
+    .video {
+        margin-top: 0;
+        padding: 73px 0 58px;
+    }
+    .video .part-video {
+        border-radius: 0;
+    }
+    .video .part-video a.play-button {
+        font-size: 26px;
+        border: 6px solid rgb(26, 221, 150);
+        line-height: 60px;
+    }
+
+    /* about page > info-feature */
+    .info-feature.about-page .bg-img {
+        display: none;
+        padding: 80px 0 50px;
+    }
+    .info-feature.about-page {
+        margin-top: 0;
+        background: #7949ed;
+        padding: 80px 0 50px;
+    }
+
+    /* about-page > litehyip feature */
+    .litehyip-features.about-page  {
+        background: #f3f6ff;
+        padding: 73px 0 40px;
+    }
+
+    /* about-page > inventor */
+    .inventor.about-page .part-text h2,
+    .inventor.about-page .part-text p {
+        color: #fff;
+    }
+
+    /* about-page > footer */
+    .footer.about-page {
+        margin-top: 0;
+    }
+
+    /* investment page > transaction */
+    .transaction {
+        padding: 73px 0 80px;
+        margin-top: 0;
+    }
+    .transaction-area .table {
+        width: 900px;
+    }
+    .transaction-area .tab-pane {
+        overflow-y: hidden;
+        overflow-x: scroll;  
+    }
+    .transaction .transaction-area .nav-tabs {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item .nav-link {
+        margin-right: 0;
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:first-child .nav-link {
+        border-radius: 50px 0 0 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    .transaction .transaction-area .nav-tabs .nav-item:last-child .nav-link {
+        border-radius: 0 50px 50px 0;
+    }
+    .transaction .transaction-area .tab-content .table thead th {
+        font-size: 16px;
+    }
+    .transaction .transaction-area .tab-content .table tbody tr th .user-img {
+        display: none;
+    }
+
+    /* investment page > pricing */
+    .pricing {
+        background: #f3f6ff;
+        padding: 72px 0 42px;
+    }
+    .pricing .section-title {
+        margin-bottom: 58px;
+    }
+    .pricing .section-title h2,
+    .pricing .section-title p {
+        color: #455164;
+    }
+    .pricing .bg-img {
+        display: none;
+    }
+    .pricing .single-plan {
+        margin-top: 0;
+        margin-bottom: 70px;
+    }
+
+    /* investment page > payment */
+    .payment {
+        padding: 84px 0 80px;
+    }
+    .payment .part-form h3 {
+        font-size: 18px;
+    }
+    .payment .part-form {
+        margin-top: 40px;
+    }
+    .payment .part-form .payment-form .form-group label {
+        font-size: 16px;
+    }
+    .payment .part-accept .single-accept {
+        float: left;
+    }
+
+    /* investment page > footer */
+    .footer.investment-page {
+        padding: 78px 0 00px;
+    } 
+
+    /* faq page */
+    .faq {
+        padding: 74px 0 50px;
+        margin-top: 0;
+    }
+    .faq .accordion .card .card-header h5 button {
+        white-space: normal;
+        padding-left: 30px;
+    }
+    .faq .accordion .card .card-body {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .faq .accordion .card .card-header h5 button:after,
+    .faq .accordion .card .card-header h5 button:before {
+        display: none;
+    }
+
+    /* blog post page */
+    .blog-post {
+        margin-top: 0;
+        padding: 80px 0 50px;
+        background: #f1f4fd;
+    }
+    .blog-post .bg-img {
+        display: none;
+    }
+    .blog-post .single-blog .part-social a:last-child {
+        display: none;
+    }
+
+    /* details blog */
+    .blog-post .single-blog.blog-details .part-text h3 {
+        font-size: inherit;
+    } 
+    .blog-post .single-blog.blog-details .part-text h4 span {
+        font-size: 12px;
+    }
+    .blog-post .single-blog.blog-details .part-text p {
+        font-size: 14px;
+        line-height: 26px;
+    }
+    .blog-post.single-blog-post {
+        padding-top: 80px;
+    }
+
+    /* contact page */
+    .contact {
+        margin-top: 0;
+        padding: 73px 0 80px;
+    }
+    .contact .contact-form {
+        padding: 20px;
+    }
+    .contact .contact-form .form-group input.form-control {
+        height: 50px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    .contact .contact-form button.submit-button {
+        margin-left: -80px;
+    }
+    .contact .contact-form .forgetting-password {
+        text-align: left;
+    }
+
+    /* footer */
+    .footer {
+        margin-top: 0;
+        padding: 77px 0 0px;
+    }
+    .footer .social {
+        margin-bottom: 40px;
+    }
+    .footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        margin-top: 72px;
+    }
+    .footer .copyright p {
+        margin-bottom: 0;
+    }
+    .footer .links {
+        margin-bottom: 25px;
+    }
+    .footer .address li {
+        padding: 4px 0;
+    }
+}
+

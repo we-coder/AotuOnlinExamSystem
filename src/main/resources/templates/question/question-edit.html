@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>试题添加--手工</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">试题录入</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a th:href="@{/}">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/manage}">试题管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/addChoice}">试题修改</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">修改</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">修改</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                                    <form  id="question_choice">
+                                        <div class="form-inline form-group">
+                                            <button type="button" class="layui-btn layui-btn-sm" data-toggle="modal" data-target="#catalogue">
+                                                分类：
+                                            </button>
+
+                                            <div th:each="catalogue:${catalogues}" th:if="${question.question_class} eq ${catalogue.id}">
+                                            <input type="text"  th:value="${catalogue.title}" name="catalogue_title" id="tree-class" disabled>
+                                            <input type="hidden" th:value="${catalogue.id}" name="question_class" id="tree-catalog-id">
+                                            </div>
+                                            <label class="my-1 mr-2" for="inlineFormCustomSelect3">选择题类型:</label>
+                                            <select class="custom-select my-1 mr-sm-2" name="question_type"  id="inlineFormCustomSelect3">
+                                                <option th:selected="${question.question_type}==${type.dict_item_name}" th:value="${type.dict_item_name}" th:each="type:${questionType}" th:text="${type.dict_item_name}">难度</option>
+                                            </select>
+                                            <label class="my-1 mr-2" for="SSSelect">难度:</label>
+                                            <select class="custom-select my-1 mr-sm-2" id="SSSelect" name="question_level" >
+                                                <option th:each="level:${questionLevel}" th:selected="${question.question_level==level.dict_item_name}" th:value="${level.dict_item_name}"  th:text="${level.dict_item_name}">类型</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div th:include="tree :: tree-modal" ></div>
+                                <!--选择题-->
+                                <form id="question_form1">
+                                    <div class="shadow-none p-3 mb-5 bg-light rounded">
+                                        <input type="hidden" th:value="${question.id}" name="id">
+                                        <div class="form-group">
+                                            <h3><label for="question_title"><div class="d-inline p-2 bg-primary text-white" >题目</div></label></h3>
+                                            <input type="text" class="form-control" id="question_title" th:value="${question?.question_title}" name="question_title" placeholder="请输入题干内容">
+                                        </div>
+
+                                        <div id="select-options" th:if="${question.question_type!='4'}">
+                                            <div class="form-group">
+                                                <h5 ><div class="d-inline p-2 bg-primary text-white">选项</div></h5>
+                                            </div>
+
+                                            <div id="form-answer">
+<!--                                                多项-->
+                                                <div id="container" class="form-group" th:each="option:${question.options}">
+                                                    <div class="input-group">
+                                                        <div class="input-group-text">
+                                                            <input type="hidden" name="opt_id" th:value="${option.opt_id}">
+                                                            <input th:type="${question.question_type=='3'}?'radio':'checkbox'" id="answerTrue" th:value="${option.opt_status}" th:checked="${option.opt_status==1}" name="opt_status">
+                                                        </div>
+                                                        <input type="text" class="form-control" th:value="${option.opt_content}" name="opt_content"  >
+                                                        <div class="input-group-text">
+                                                            <a class='button' onclick='test(this)' href="#"><i class="la flaticon-cross"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="button" id="add" class="btn btn-primary btn-lg btn-block">添加选项</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" th:if="${question.question_type=='4'}" th:each="option:${question.options}">
+                                            <input type="hidden" name="opt_id" th:value="${option.opt_id}">
+                                            <input type="hidden" name="opt_status" value="1">
+                                            <h3><label for="question_answer"><div class="d-inline p-2 bg-primary text-white">参考答案</div></label></h3>
+                                            <textarea class="form-control" id="question_answer" name="opt_content" th:text="${option.opt_content}" rows="3"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h3><label for="question_analysis"><div class="d-inline p-2 bg-primary text-white">解析</div></label></h3>
+                                            <textarea class="form-control" id="question_analysis" th:text="${question.question_analysis}" name="question_analysis" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                                <button type="button"  onclick="addQuestion(1)" class="btn btn-primary mb-2">保存修改</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script th:inline="javascript">
+    //赋值给组件
+    var add = document.getElementById('add');
+    var container =document.getElementById('container');
+    var node=container.nextSibling;
+    var count = 1;
+    add.onclick = function(){
+        count++;
+        oDiv = document.createElement('div');
+        oDiv.innerHTML =" <div id=\"container\" class=\"form-group\">\n" +
+            "                                                <div class=\"input-group\">\n" +
+            "                                                    <div class=\"input-group-text\">\n" +
+            "                                                            <input type=\"checkbox\" id=\"answerCheck\" value=\"\" name=\"opt_status\">\n" +
+            "                                                    </div>\n" +
+            "                                                    <input type=\"text\" class=\"form-control\"  name=\"opt_content\" >\n" +
+            "                                                    <div class=\"input-group-text\">\n" +
+            "                                                        <a class='button' onclick='test(this)' href=\"#\"><i class=\"la flaticon-cross\"></i></a>\n" +
+            "                                                    </div>\n" +
+            "                                                </div>";
+        container.parentNode.insertBefore(oDiv, node)
+        node=oDiv.nextSibling;
+
+    }
+    function test(test){
+        test.parentNode.parentNode.parentNode.parentNode.removeChild(test.parentNode.parentNode.parentNode);
+    }
+
+    function addQuestion(id) {
+
+        //选择题选项数据
+        var options = $("input[name='opt_status']");
+        var optionData=checkedData(options);
+        //判断题选项数据
+        var check_options = $("input[name='check_status']");
+        var check_optionData=checkedData(check_options);
+        //分类数据
+        var data=$("#question_choice").serialize();
+        //全部数据
+        var allData;
+        //判断哪种题型
+        if(id=='1'){
+            //题目数据
+            var data1=$('#question_form1').serialize();
+            allData=data+"&"+optionData+"&"+data1;
+        }else if(id=='2'){
+            var data2=$('#question_form2').serialize();
+            allData=data+"&"+optionData+"&"+data2+"&"+"question_type=3";
+        }else if(id=='3'){
+            var data3=$('#question_form3').serialize();
+            allData=data+"&"+data3+"&"+"question_type=4&opt_status=1";
+        }
+
+        $.get("/question/add.action",allData,function(data){
+            if(data.msg =="OK"){
+                alert("成功！");
+            }else{
+                alert("失败！");
+                window.location.reload();
+            }
+        });
+
+    }
+
+    //序列化选项数据
+    function checkedData(options) {
+        var testData=answerAll(options);
+        var oo;
+        for (var j=0;j<testData.length;j++){
+            if(!oo){
+                oo="opt_status"+"="+testData[j].value
+            }else{
+                oo=oo+"&"+"opt_status"+"="+testData[j].value
+            }
+
+        }
+        return oo;
+        // alert(oo);
+    }
+
+    //为选项赋值，0：错误，1：正确
+    function answerAll(options) {
+        var optList=new Array();
+        for (var j=0;j<options.length;j++){
+            if(!options[j].checked){
+                options[j].value="0";
+                optList.push(options[j])
+            }else{
+                options[j].value="1";
+                optList.push(options[j])
+            }
+        }
+        return optList
+    }
+</script>
+</body>
+</html>

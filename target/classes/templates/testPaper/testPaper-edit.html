@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>试题添加--手工</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">试卷修改</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a th:href="@{/}">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/manage}">试卷管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/question/addChoice}">试卷生成</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">试卷修改</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">试卷修改</h4>
+                                    <div class="ml-md-auto py-2 py-md-0">
+                                        <button onclick="addTestPaper()" class="btn btn-primary btn-refresh-card">保存试卷</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="shadow-sm p-3 mb-5 bg-white rounded" >
+                                    <form id="testPaper-head-data">
+                                        <input type="hidden" th:value="${testPaper.id}" name="id">
+                                        <div class="form-group">
+                                            <label for="question_title2"><div class="d-inline p-2 bg-primary text-white">试卷名称</div></label>
+                                            <input type="text" name="name" class="form-control" th:value="${testPaper.name}" id="question_title2" placeholder="请输入题干内容">
+                                        </div>
+                                        <div class="form-inline form-group">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#catalogue">
+                                                分类：
+                                            </button>
+                                            <div th:each="catalogue:${catalogues}" th:if="${testPaper.type} eq ${catalogue.id}">
+                                                <input type="text"  th:value="${catalogue.title}" class="form-control" name="catalogue_title" id="tree-class" disabled>
+                                                <input type="hidden" th:value="${catalogue.id}" name="question_class" id="tree-catalog-id">
+                                            </div>
+                                        </div>
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <label class="duration"><div class="d-inline p-2 bg-primary text-white">时长</div></label>
+                                                <input type="text" class="form-control" th:value="${testPaper.duration}" name="duration" id="duration" placeholder="HH:mm:ss">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                                    <div class="form-inline" id="question_choice">
+                                        <div class="form-group">
+                                            <label for="setScore">分数</label>
+                                            <input type="text" class="form-control" id="setScore" name="setScore" />
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                设置
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" onclick="setScore(1)" href="#">单选题</a>
+                                                <a class="dropdown-item" onclick="setScore(2)" href="#">多选题</a>
+                                                <a class="dropdown-item" onclick="setScore(3)" href="#">判断题</a>
+                                                <a class="dropdown-item" onclick="setScore(4)" href="#">主观题</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" onclick="setScore(5)" href="#">全部</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion accordion-secondary">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <div class="span-icon">
+                                                <div class="flaticon-box-1"></div>
+                                            </div>
+                                            <div class="span-title">
+                                                试卷内容
+                                            </div>
+                                            <div class="span-mode"></div>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <form id="testPaper-body-data">
+                                                    <div id="container2" th:each="question:${testPaper.questions}" >
+                                                        <div class="shadow-sm p-3 mb-5 bg-grey1 rounded">
+                                                            <div class="form-inline" id="question3">
+                                                                <input type="hidden" name="questions_ids" th:value="${question.id}">
+                                                                <h4 class="text-info" th:text="${question.question_type}">分类</h4>
+                                                                <h3 th:text="${question.question_title}">题目1</h3>
+                                                                <div class="ml-md-auto py-2 py-md-0">
+                                                                    <a th:href="@{'/question/edit?id='+${question.id}}" class="btn btn-danger">修改</a>
+                                                                    <button class="btn btn-danger" onclick="divRemote(this)"><i class="la flaticon-cross"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="custom-control custom-checkbox">
+                                                                参考答案：
+                                                                <ul id="ul-options" >
+                                                                    <li th:each="option:${question.options}">
+                                                                    <input type="checkbox" class="custom-control-input" id="checkbox-answer" th:checked="${option.opt_status==1}" th:value="${option.opt_status}" disabled>
+                                                                    <label class="custom-control-label" for="checkbox-answer" th:text="${option.opt_content}">选项</label>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+<!--                                                            <h4><span>null</span></h4>-->
+                                                            <h4>解析：<span th:text="${question.question_analysis}"></span></h4>
+                                                            <h4>说明：</h4>
+                                                            <div class="form-group form-inline">
+                                                                <label for="score-1">分数</label>
+                                                                <input type="text" class="form-control" id="score-1" value="10" name="score">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+<!--                                                    插入试题-->
+                                                    <div id="container">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <button type="button" id="add2" data-toggle="modal" data-target="#addModalQuestion" class="btn btn-outline-primary btn-lg btn-block">添加试题</button>
+
+                                <div th:include="tree :: tree-modal" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModalQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalCenterTitle">试题选择</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="question_choice6">
+                        <label class="my-1 mr-2" for="modal_question_type">题型</label>
+                        <select class="custom-select my-1 mr-sm-2" name="question_type"  id="modal_question_type">
+                            <option selected value="">请选择</option>
+                            <option value="单选" >单选</option>
+                            <option value="多选">多选</option>
+                            <option value="判断">判断</option>
+                            <option value="主观">主管</option>
+                        </select>
+                        <label class="my-1 mr-2" for="modal_question_level">类型</label>
+                        <select class="custom-select my-1 mr-sm-2" name="question_level"  id="modal_question_level">
+                            <option selected value="">请选择</option>
+                            <option value="简单" >简单</option>
+                            <option value="中等">中等</option>
+                            <option value="困难">困难</option>
+                        </select>
+                        <input type="text" id="modal_question_title" class="form-control"  name="question_title">
+                        <a class="btn btn-primary" id="questionSearch" href="#">查询</a>
+                    </form>
+                    <table class="layui-hide" id="demo" lay-filter="test"></table>
+                </div>
+                <div class="modal-footer" id="modal-footer-btn">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">添加选中试题</button>
+    </div>
+</script>
+<th:block th:include="tree::tree-js"></th:block>
+<script th:inline="javascript">
+
+    //日期选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //开始时间
+        laydate.render({
+            elem: '#start_time'
+            , type: 'datetime'
+        });
+        //开始时间
+        laydate.render({
+            elem: '#end_time'
+            , type: 'datetime'
+        });
+        //持续时间
+        laydate.render({
+            elem: '#duration'
+            , type: 'time'
+        });
+    });
+
+
+    //表格
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //执行一个 table 实例
+        var tableQuestion=table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/question/findAll' //数据接口
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data.content //解析数据列表
+                }
+            }
+            ,title: '试题库'
+            ,page: true //开启分页
+            ,cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                    ,{field: 'question_title', title: '题干', width:250}
+                    ,{field: 'question_type', title: '题型', width: 90, sort: true}
+                    ,{field: 'question_analysis', title: '解析', width:80, sort: true}
+                    ,{field: 'question_level', title: '难度', width:80, sort: true}
+                    ,{field: 'create_time', title: '时间', width:160, sort: true}
+                ]
+            ]
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    for (var i=0;i<data.length;i++){
+                        addDiv(data[i])
+                    }
+                    break;
+            };
+        });
+
+
+        questionSearch.onclick=function(){
+            var question_type=document.getElementById('modal_question_type').value
+                ,question_title=document.getElementById('modal_question_title').value
+                ,question_class=document.getElementById('modal_question_class').value
+                ,question_level=document.getElementById('modal_question_level').value;
+            tableQuestion.reload({
+                where: { //设定异步数据接口的额外参数，任意设
+                    question_type: question_type
+                    ,question_title: question_title
+                    ,question_class: question_class
+                    ,question_level: question_level
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+    });
+
+
+
+
+    var container =document.getElementById('container');
+    var node=container.nextSibling;
+    var count = 0;
+    function addDiv(data){
+        oDiv = document.createElement('div');
+        var sc;
+        if (data.question_type==='单选'||data.question_type==='单选题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-1\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='多选'||data.question_type==='多选题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-2\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='判断'||data.question_type==='判断题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-3\" value=\"10\" name=\"score\" />";
+        }else if (data.question_type==='主观'||data.question_type==='主观题') {
+            sc = "<input type=\"text\" class=\"form-control\" id=\"score-4\" value=\"10\" name=\"score\" />";
+        };
+        var rs="";
+        for (var i=0;i<data.options.length;i++) {
+
+            if (data.options[i].opt_status == 1) {
+                rs =rs+"<li >\n" +
+                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\" checked=\"checked\" name=\"answer\" value=\"1\" disabled>\n" +
+                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+                    "                               </li>";
+            } else {
+                rs =rs+"<li >\n" +
+                    "                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\"  name=\"answer\" value=\"0\" disabled>\n" +
+                    "                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+                    "                               </li>"
+            }
+        }
+        oDiv.innerHTML =" <div id=\"container\">\n" +
+            "                                    <div class=\"shadow-sm p-3 mb-5 bg-grey1 rounded\">\n" +
+            "                                        <div class=\"form-inline\" id=\"question3\">\n" +
+            "                                           <input type=\"hidden\" name=\"questions_ids\" value=\""+data.id+"\">\n" +
+            "                                            <h4 class=\"text-info\">"+data.question_type+"</h4>\n" +
+            "                                            <h3>"+data.question_title+"</h3>\n" +
+            "                                            <div class=\"ml-md-auto py-2 py-md-0\">\n" +
+            "                                                <a href=\"/question/edit?id="+data.id+"\" class=\"btn btn-danger\">修改</a>\n" +
+            "                                                <button class='btn btn-danger' onclick='divRemote(this)' ><i class=\"la flaticon-cross\"></i></button>\n" +
+            "                                            </div>\n" +
+            "                                        </div>\n" +
+            "                                        <div class=\"custom-control custom-checkbox\">\n" +
+            "                                            <ul id='ul-options'>"+rs+"</ul>\n" +
+            "                                        </div>\n" +
+            "                                        <h4>解析：<span >"+data.question_analysis+"</span></h4>\n" +
+            "                                        <h4>说明：</h4>\n" +
+            "                                        <div class=\"form-group form-inline\">\n" +
+            "                                            <label for=\"score-1\">分数</label>\n" +sc+
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </div>";
+        container.parentNode.insertBefore(oDiv, node)
+        node=oDiv.nextSibling;
+
+    }
+    function divRemote(test){
+        test.parentNode.parentNode.parentNode.parentNode.removeChild(test.parentNode.parentNode.parentNode);
+    }
+
+    //设置分数
+    function setScore(data){
+        var score=document.getElementById('setScore').value;
+        switch (data) {
+            case 1 :
+                $("[id=score-1]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 2 :
+                $("[id=score-2]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 3 :
+                $("[id=score-3]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 4 :
+                $("[id=score-4]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+            case 5 :
+                $("[id=score-1]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-2]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-3]").each(function(){
+                    $(this).val(score);
+                });
+                $("[id=score-4]").each(function(){
+                    $(this).val(score);
+                });
+                break;
+
+        };
+    }
+
+    function addTestPaper() {
+        var data1=$("#testPaper-head-data").serialize()+"&"+$("#testPaper-body-data").serialize();
+        $.get("/testPaper/add",data1,function (data) {
+            if(data.msg=="OK"){
+                alert("成功");
+                window.location.reload();
+            }
+
+        })
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.6">
+  <title>Floating labels example 路 Bootstrap</title>
+  <link th:href="@{/assets/css/floating-labels.css}" rel="stylesheet">
+  <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
+
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+</head>
+<body>
+<form class="form-signin" method="post" th:action="@{/register}">
+  <div class="text-center mb-4">
+    <img class="mb-4" th:src="@{/assets/img/bootstrap-solid.svg}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">注册页面</h1>
+    <p>AOES欢迎您 <code th:text="${msg}">信息</code> pseudo-element. <a th:href="@{/login}">已有账号，请登录.</a></p>
+  </div>
+
+  <div class="form-label-group">
+    <input type="text" id="inputEmail" class="form-control"  name="username" placeholder="请输入用户名" required autofocus>
+    <label for="inputEmail">用户名</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" id="inputPassword" class="form-control" name="password" placeholder="请输入密码" required>
+    <label for="inputPassword">密码</label>
+  </div>
+
+  <div class="custom-control custom-checkbox mb-3">
+    <input type="checkbox" class="custom-control-input" id="customCheck1">
+    <label class="custom-control-label" for="customCheck1">记住密码</label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2019</p>
+</form>
+
+</body>
+</html>

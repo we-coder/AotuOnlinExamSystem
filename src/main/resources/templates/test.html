@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>自动组卷</title>
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h2 class="text-white pb-2 fw-bold">数据分析</h2>
+                            <h5 class="text-white op-7 mb-2">统计表样式基于 Bootstrap 4 </h5>
+                        </div>
+                        <div class="ml-md-auto py-2 py-md-0">
+                            <a href="#" class="btn btn-white btn-border btn-round mr-2">管理考试</a>
+                            <a href="#" class="btn btn-secondary btn-round">添加考试</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card full-height">
+                            <div class="card-body">
+                                <div class="card-title">基于每次考试进行数据分析</div>
+                                <div class="card-category">Data analysis based on each test</div>
+                                <div class=" form-group">
+                                    <label  for="pillSelect">考试场次：</label>
+                                    <select onchange="window.location=this.value;" class="form-control input-pill" id="pillSelect">
+                                        <option value="/grade/dataAnalysis">请选择</option>
+                                        <option th:each="exam:${examList}" th:value="'/grade/dataAnalysis?exam_id='+${exam.id}" th:selected="${exam.id} eq ${exam_id}" th:text="${exam.exam_name}"></option>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="circles-1"><h3 class="text-info" th:text="${stu_num}">45</h3></div>
+                                        <h6 class="fw-bold mt-3 mb-0">考试人数</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="circles-2"><h3 class="text-info" th:text="${totalScore}">45</h3></div>
+                                        <h6 class="fw-bold mt-3 mb-0">总分</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="circles-3"><h3 class="text-danger" th:text="${avg_score}">25</h3></div>
+                                        <h6 class="fw-bold mt-3 mb-0 ">平均分</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">平均得分比例</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="pieChart" style="width: 50%; height: 50%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">考试情况</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">分数统计</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="barChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">答题情况</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="multipleBarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+<script>
+    var barChart = document.getElementById('barChart').getContext('2d'),
+        pieChart = document.getElementById('pieChart').getContext('2d'),
+        doughnutChart = document.getElementById('doughnutChart').getContext('2d'),
+        multipleBarChart = document.getElementById('multipleBarChart').getContext('2d')
+    url = window.location.search; /* 获取属性（“?”后面的分段） */
+    // $.ajaxSetup({async : false});
+    $.post("/grade/examAnalysis"+url,null,function (data1) {
+        var myBarChart = new Chart(barChart, {
+            type: 'bar',
+            data: {
+                labels: data1.stu_names,
+                datasets : [{
+                    label: data1.name,
+                    backgroundColor: 'rgb(23, 125, 255)',
+                    borderColor: 'rgb(23, 125, 255)',
+                    data: data1.stu_scores,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+            }
+        });
+
+
+        var myMultipleBarChart = new Chart(multipleBarChart, {
+            type: 'bar',
+            data: {
+                labels: ["单选题", "多选题", "判断题", "主观题"],
+                datasets : [{
+                    label: "错误",
+                    backgroundColor: '#f3545d',
+                    borderColor: '#f3545d',
+                    data: data1.wq,
+                },{
+                    label: "正确",
+                    backgroundColor: '#177dff',
+                    borderColor: '#177dff',
+                    data: data1.rq,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position : 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: '题目分析'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        });
+
+
+        //平均得分
+        var myPieChart = new Chart(pieChart, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data1.scores,
+                    backgroundColor :["#1d7af3","#f3545d","#fdaf4b","rgba(16,206,11,0.87)"],
+                    borderWidth: 0
+                }],
+                labels: ['单选题', '多选题', '判断题','主观题']
+            },
+            options : {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position : 'bottom',
+                    labels : {
+                        fontColor: 'rgb(154, 154, 154)',
+                        fontSize: 11,
+                        usePointStyle : true,
+                        padding: 20
+                    }
+                },
+                pieceLabel: {
+                    render: 'percentage',
+                    fontColor: 'white',
+                    fontSize: 14,
+                },
+                tooltips: false,
+                layout: {
+                    padding: {
+                        left: 20,
+                        right: 20,
+                        top: 20,
+                        bottom: 20
+                    }
+                }
+            }
+        })
+
+        var myDoughnutChart = new Chart(doughnutChart, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: data1.subs,
+                    backgroundColor: ['#1d7af3','#f3545d']
+                }],
+
+                labels: [
+                    '已考',
+                    '缺考'
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend : {
+                    position: 'bottom'
+                },
+                layout: {
+                    padding: {
+                        left: 20,
+                        right: 20,
+                        top: 20,
+                        bottom: 20
+                    }
+                }
+            }
+        });
+
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

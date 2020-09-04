@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<link  rel="stylesheet" type="text/css"  th:href="@{/css/login-style.css}" />
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}" ></script>
+	<script type="text/javascript" th:src="@{/js/register.js}" ></script>
+</head>
+<body>
+
+	<div class="aui-register-popup">
+		<div class="aui-register-box">
+			<div class="aui-register-link">
+				<a th:href="@{/}" class="fl">返回首页</a>
+				<a th:href="@{/login}" class="fr">已有账号？去登录</a>
+			</div>
+			<div class="aui-register-logo">
+				<img th:src="@{/images/logo.png}"  alt="">
+			</div>
+			<div class="aui-register-form" id="verifyCheck">
+				<form id="register-form">
+					<div class="aui-register-form-item">
+						<input type="text" name="tel"  placeholder="手机号码" class="txt01 f-r3 required" tabindex="1" data-valid="isNonEmpty||isPhone" data-error="<i class='icon-tips'></i>请输入手机号||<i class='icon-tips'></i>手机号码格式不正确" maxlength="11" id="tel">
+						<label class="focus valid"><div class="msg" style="display:none"><i class='icon-tips'></i>您还未输入手机号</div></label>
+					</div>
+					<div class="aui-register-form-item">
+						<input type="text" name="username"  maxlength="20"  placeholder="账户名" class="txt03 f-r3 required" tabindex="3" data-valid="isNonEmpty||between:3-20||isUname" data-error="<i class='icon-tips'></i>您还没有输入账户名||<i class='icon-tips'></i>用户名长度3-20位||<i class='icon-tips'></i>只能输入字母、数字、且以中文或字母开头" id="username">
+						<label class="focus valid"></label>
+					</div>
+					<div class="aui-register-form-item">
+						<input type="password" name="password"  placeholder="设置密码" id="password" maxlength="20" class="txt04 f-r3 required" tabindex="4" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-20||level:2" data-error="<i class='icon-tips'></i>密码太短，最少6位||<i class='icon-tips'></i>密码长度6-20位||<i class='icon-tips'></i>密码太简单，有被盗风险，建议字母+数字的组合">
+						<label class="focus valid"></label>
+					</div>
+					<div class="aui-register-form-item">
+						<input type="password" name="rePassword" placeholder="确认密码" maxlength="20" class="txt05 f-r3 required" tabindex="5" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-16||isRepeat:password" data-error="<i class='icon-tips'></i>两次密码输入不一致||<i class='icon-tips'></i>密码长度6-16位||<i class='icon-tips'></i>两次密码输入不一致" id="rePassword">
+						<label class="focus valid"></label>
+					</div>
+					<div class="aui-radio-form-item">
+						<strong>身份：</strong>
+						<label>考生：</label>
+						<input type="radio" name="role_id" value="3" checked >
+						&nbsp;&nbsp;
+						<label>教师：</label>
+						<input type="radio" name="role_id" value="2"  >
+					</div>
+				</form>
+
+					<div class="aui-register-form-item">
+						<button type="button" id="aui-btn-reg" class="aui-btn-reg"  >注册</button>
+					</div>
+			</div>
+			<div class="aui-register-bottom">
+				<a>Aoes</a>
+				<a href="#">©btvson.com</a>
+				<a href="#">2020</a>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+	$(function() {
+
+		$("#aui-btn-reg").click(function() {
+			if (!verifyCheck._click()) return;
+			res()
+
+		});
+	});
+
+	function res() {
+			$.get("/register", $("#register-form").serialize(),function(data) {
+				if (data == "OK") {
+					alert("注册成功！");
+					window.location.href="/login";
+				} else {
+					alert("注册失败,该用户已存在!");
+					window.location.reload();
+				}
+			});
+	}
+</script>
+</body>
+</html>
+
+
+
+

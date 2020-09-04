@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> AOES在线考试系统 </title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}" >
+    <!-- fontawesome icon  -->
+    <link rel="stylesheet" th:href="@{assets/index/css/fontawesome.min.css}" >
+    <!-- flaticon css -->
+    <link rel="stylesheet" th:href="@{assets/index/fonts/flaticon.css}" >
+    <!-- animate.css -->
+    <link rel="stylesheet" th:href="@{assets/index/css/animate.css}" >
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" th:href="@{assets/index/css/owl.carousel.min.css}">
+    <!-- magnific popup -->
+    <link rel="stylesheet" th:href="@{assets/index/css/magnific-popup.css}" >
+    <!-- stylesheet -->
+    <link rel="stylesheet" th:href="@{assets/index/css/style.css}" >
+    <!-- responsive -->
+    <link rel="stylesheet" th:href="@{assets/index/css/responsive.css}" >
+</head>
+
+<body>
+
+<!-- preloader begin-->
+<div class="preloader">
+    <div class="loader">
+        <hr><hr>
+    </div>
+</div>
+<!-- preloader end -->
+
+
+<!-- header begin-->
+<div class="header">
+    <div class="container">
+        <div class="row justify-content-between d-flex">
+            <div class="col-xl-2 col-lg-2 d-xl-flex d-lg-flex d-block align-items-center mobile-header">
+                <div class="row d-flex">
+                    <div class="col-xl-12 col-lg-12 col-6 d-flex align-items-center">
+                        <div class="logo">
+                            <a href="index.html" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/index.html"><img src="assets/img/logo.png" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/assets/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-6 d-xl-none d-lg-none d-block">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-8 min-height-none">
+                <div class="main-menu">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <ul class="navbar-nav nav justify-content-center">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#" >主页 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" >关于</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                       aria-expanded="false">资讯</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#" >新闻动态</a>
+                                        <a class="dropdown-item" href="#" >个人博客</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">联系我们</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-2 d-xl-flex d-lg-flex d-none align-items-center">
+                <div class="login">
+                    <a th:href="@{/login}" >登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- header end -->
+
+
+<!-- banner begin-->
+<div class="banner">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8">
+                <div class="banner-content">
+                    <h1>AOES在线考试系统</h1>
+                    <h1>您的智能考试系统</h1>
+                    <p>放下的你的笔和纸，愉快地来吧！</p>
+                    <a th:href="@{/login}">登录</a>
+                    <a th:href="@{/user/toRegister}">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner end -->
+
+<!-- info feature begin-->
+<div class="info-feature">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="info-single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-group"></i>
+                    </div>
+                    <div class="part-text">
+                        <h2>4种题型</h2>
+                        <h3>持续增加</h3>
+                        <p>该系统现阶段包含了选题题，其中选择题有单选和多选，此外还有判断题和主观题，更新题型不断更新中...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="info-single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-money"></i>
+                    </div>
+                    <div class="part-text">
+                        <h2>三级管理模式</h2>
+                        <h3>Three Model</h3>
+                        <p>本系统有三层用户级别，分别是超级管理员（系统级维护人员），二级管理员（老师），普通用户（学生）。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="info-single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-hand"></i>
+                    </div>
+                    <div class="part-text">
+                        <h2>可视化操作</h2>
+                        <h3>Total Profits</h3>
+                        <p>本系统采用大量的可视化的图标显示，具有简单易懂，极易上手操作，符合传统的考试习惯，而又同时兼具了新特点</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- info feature end -->
+
+<!-- litehyip features begin-->
+<div class="litehyip-features">
+    <div class="bg-img">
+        <img th:src="@{assets/index/img/litehyip-feature-bg.png}"  alt="">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-8">
+                <div class="section-title">
+                    <h2><span>AOES</span> 特性</h2>
+                    <p>本系统为在线考试系统，具有智能化，自动化，大数据分析，图像识别的特点</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-brain"></i>
+                    </div>
+                    <div class="part-text">
+                        <h3>面向群体</h3>
+                        <p>本系统面向所有人群开放，包含了政府部门，高校，中小学，社会企业等</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-patent"></i>
+                    </div>
+                    <div class="part-text">
+                        <h3>安全认证</h3>
+                        <p>本系统采用了spring boot sercury，安全性高</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <i class="flaticon-donation"></i>
+                    </div>
+                    <div class="part-text">
+                        <h3>数据持久化</h3>
+                        <p>本系统部署与阿里云，阿里云服务器采用五省三地的安全保障模式，使数据安全稳定可靠</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- litehyip features end -->
+
+<!-- we thinking global begin-->
+<div class="we-thinking-global">
+    <div class="container">
+        <div class="row justify-content-around d-flex">
+            <div class="col-xl-6 col-lg-6">
+                <div class="part-img">
+                    <img th:src="@{assets/index/img/we-thinking-bg.jpg}" alt="">
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 d-flex align-items-center">
+                <div class="part-text">
+                    <h2>大数据分析
+                        <span>基于网站考试大数据分析</span></h2>
+                    <p>该功能能清晰地显示考生的考试情况，比如得分，失分情况，总体分析，能力分析</p>
+                    <a href="#">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- we thinking global end -->
+
+<!-- inventor begin-->
+<div class="inventor">
+    <div class="bg-img">
+        <img th:src="@{assets/index/img/ventor-bg.png}"  alt="">
+    </div>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-xl-5 col-lg-6 d-flex align-items-center">
+                <div class="part-text">
+                    <h2>我们的 <span>用户</span> </h2>
+                    <p>无论你是学生，教师，工人，农民，科学家，都可以加入到AOES系统来进行一场快乐的考试</p>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5 offset-xl-1">
+                <div class="part-inventor">
+                    <div class="single-inventor">
+                        <img th:src="@{assets/index/img/inventor-1.png}"  alt="">
+                    </div>
+                    <div class="single-inventor">
+                        <img th:src="@{assets/index/img/inventor-2.png}"  alt="">
+                    </div>
+                    <div class="single-inventor">
+                        <img th:src="@{assets/index/img/inventor-3.png}"  alt="">
+                    </div>
+                    <div class="single-inventor">
+                        <img th:src="@{assets/index/img/inventor-4.png}"  alt="">
+                    </div>
+                    <div class="single-inventor">
+                        <img th:src="@{assets/index/img/inventor-5.png}"  alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- inventor end -->
+
+<!-- testimonial begin-->
+<div class="testimonial">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6">
+                <div class="section-title text-center">
+                    <h2>用户 <span>评论</span></h2>
+                    <p>评论仅代表个人观点，与本网站价值观无关</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="testimonial-slider">
+
+                    <div class="single-testimonial">
+                        <div class="d-flex">
+                            <div class="part-img">
+                                <img src="assets/img/testimonial-1.png" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/assets/img/testimonial-1.png" alt="">
+                            </div>
+                            <div class="part-info">
+                                <h3>小军</h3>
+                                <h4>考试</h4>
+                            </div>
+                        </div>
+                        <div class="part-text">
+                            <p>“AOES系统虽然刚出来，但是已经完成了大部分功能，相信剩下的功能也会很快开发出来的”</p>
+                        </div>
+                    </div>
+
+                    <div class="single-testimonial">
+                        <div class="d-flex">
+                            <div class="part-img">
+                                <img src="assets/img/testimonial-1.png" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/assets/img/testimonial-1.png" alt="">
+                            </div>
+                            <div class="part-info">
+                                <h3>黄老师</h3>
+                                <h4>老师</h4>
+                            </div>
+                        </div>
+                        <div class="part-text">
+                            <p>“作为老师，感觉这个系统虽然有缺点，但是它能帮我减轻了考试的工作量，点赞！！！”</p>
+                        </div>
+                    </div>
+
+                    <div class="single-testimonial">
+                        <div class="d-flex">
+                            <div class="part-img">
+                                <img src="assets/img/testimonial-1.png" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/assets/img/testimonial-1.png" alt="">
+                            </div>
+                            <div class="part-info">
+                                <h3>jj</h3>
+                                <h4>老师</h4>
+                            </div>
+                        </div>
+                        <div class="part-text">
+                            <p>“We bring right people together to challenge established thinking
+                                and drive transformation. We will show the way to successive. Put
+                                your investing ideas into action with full range of investments
+                                on your accrue investing.”</p>
+                        </div>
+                    </div>
+
+                    <div class="single-testimonial">
+                        <div class="d-flex">
+                            <div class="part-img">
+                                <img src="assets/img/testimonial-1.png" tppabs="https://www.17sucai.com/preview/1474877/2018-11-25/LiteHYIP/assets/img/testimonial-1.png" alt="">
+                            </div>
+                            <div class="part-info">
+                                <h3>来自美国的小华</h3>
+                                <h4>学生</h4>
+                            </div>
+                        </div>
+                        <div class="part-text">
+                            <p>“We bring right people together to challenge established thinking
+                                and drive transformation. We will show the way to successive. Put
+                                your investing ideas into action with full range of investments
+                                on your accrue investing.”</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- testimonial end -->
+
+<!-- newsletter begin-->
+<div class="newsletter">
+    <div class="bg-img">
+        <img th:src="@{assets/index/img/newsletter-bg.png}" alt="">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6">
+                <div class="section-title text-center">
+                    <h2>加入我们<span> Newsletter</span></h2>
+                    <p>哈哈哈哈哈哈</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6">
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter E-mail Address">
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- newsletter end -->
+
+<!-- footer begin-->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div class="about-area">
+                    <a href="index.html" ><img th:src="@{assets/img/logo.png}"  alt=""></a>
+                    <p>AOES考试系统</p>
+                </div>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6">
+                <div class="links">
+                    <h3>Link</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">主页</a>
+                        </li>
+                        <li>
+                            <a href="#">关于</a>
+                        </li>
+                        <li>
+                            <a href="#">个人博客</a>
+                        </li>
+                        <li>
+                            <a href="#">....</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="address">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li>
+                            广东省，东莞市<br/>
+                            广东科技学院
+                        </li>
+                        <li>
+                            1799772817@qq.com
+                        </li>
+                        <li>
+                            13556613484
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 text-center">
+                <div class="copyright">
+                    <p>粤ICP备20010419号</p>
+                    <p>© 2020. All Rights <a href="www.btvson.com"  title="AOES">Reserved</a>. BTVSON</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end -->
+
+
+<!-- jquery -->
+<script th:src="@{assets/index/js/jquery.js}" ></script>
+<!-- bootstrap -->
+<script th:src="@{assets/index/js/bootstrap.min.js}" ></script>
+<!-- owl carousel -->
+<script th:src="@{assets/index/js/owl.carousel.js}" ></script>
+<!-- magnific popup -->
+<script th:src="@{assets/index/js/jquery.magnific-popup.js}" ></script>
+<!-- way poin js-->
+<script th:src="@{assets/index/js/waypoints.min.js}" ></script>
+<!-- wow js-->
+<script th:src="@{assets/index/js/wow.min.js}" ></script>
+<!-- main -->
+<script th:src="@{assets/index/js/main.js}" ></script>
+</body>
+
+</html>

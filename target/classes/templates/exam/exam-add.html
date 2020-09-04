@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Smart Wizard 2 - Basic Example  - a javascript jQuery wizard control plugin</title>
+
+<link th:href="@{/guide/styles/smart_wizard.css}"  rel="stylesheet" type="text/css">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all">
+	<th:block th:include="public::css"></th:block>
+
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- 顶部导航、边栏 -->
+	<th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<div class="page-header">
+					<h4 class="page-title">发布考试</h4>
+					<ul class="breadcrumbs">
+						<li class="nav-home">
+							<a href="#">
+								<i class="flaticon-home"></i>
+							</a>
+						</li>
+						<li class="separator">
+							<i class="flaticon-right-arrow"></i>
+						</li>
+						<li class="nav-item">
+							<a href="#">考试管理</a>
+						</li>
+						<li class="separator">
+							<i class="flaticon-right-arrow"></i>
+						</li>
+						<li class="nav-item">
+							<a href="#">考试设置</a>
+						</li>
+					</ul>
+				</div>
+                <form id="exam-formData" type="post" action="/exam/add">
+				<div id="wizard" class="swMain">
+					<ul>
+						<li><a href="#step-1"><span class="stepNumber">1</span><span class="stepDesc">选择考卷<br /><small>选择一张考卷</small></span></a></li>
+						<li><a href="#step-2"><span class="stepNumber">2</span><span class="stepDesc">选择考生<br /><small>选择考生考试</small></span></a></li>
+						<li><a href="#step-3"><span class="stepNumber">3</span><span class="stepDesc">设置考试信息<br /><small>可设置多种</small></span></a></li>
+					</ul>
+                        <div id="step-1" >
+                            <h2 class="StepTitle">请选择考卷
+                                <button type="button" class='btn btn-primary btn-xs' data-toggle="modal" data-target="#modal-userAll">
+                                    选择
+                                </button>
+                            </h2>
+                            <div class="accordion ">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <div class="span-icon">
+                                            <div class="flaticon-box-1"></div>
+                                        </div>
+                                        <input type="hidden" id="testPaper-id" name="testpaper_id" value="">
+                                        <div class="span-title" id="testPaper-name">
+                                            未选择考卷，请点击蓝色的按钮选择考卷
+                                        </div>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div id="step-2">
+                            <h2 class="StepTitle">请选择考生</h2>
+                            <div class="accordion" id="accordionExample">
+
+                                    <div class="card" th:each="class,classStat:${classList}">
+                                        <div class="card-header" th:id="'heading'+${classStat.count}">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" th:id="'class_id'+${classStat.count}" name="class_id" th:value="${class.id}" class="custom-control-input">
+                                                <label class="custom-control-label" th:for="'class_id'+${classStat.count}" th:text="${class.class_name}">Toggle this custom radio</label>
+                                            </div>
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" th:data-target="'#collapse'+${classStat.count}" aria-expanded="false" th:aria-controls="'collapse'+${classStat.count}">
+                                                    详细信息
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div th:id="'collapse'+${classStat.count}" class="collapse" th:aria-labelledby="'heading'+${classStat.count}" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <ul>
+                                                    <table id="multi-filter-select" class="display table table-striped table-hover border  table-head-bg-info " >
+                                                        <thead>
+                                                        <tr>
+                                                            <th>学号</th>
+                                                            <th>姓名</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="student:${class.users}">
+                                                            <td th:text="${student.id}">学号</td>
+                                                            <td th:text="${student.username}">姓名</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                        <div id="step-3">
+                            <h2 class="StepTitle">请设置信息</h2>
+                            <div class="shadow-sm p-3 mb-5 bg-white rounded" >
+
+                                    <div class="form-group">
+                                        <label for="exam_name"><div class="d-inline p-2 bg-primary text-white">考试名称</div></label>
+                                        <input type="text" name="exam_name" class="form-control" id="exam_name" placeholder="请输入内容">
+                                    </div>
+                                    <div class="form-inline form-group">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#catalogue">
+                                            分类：
+                                        </button>
+                                        <input type="text" value="其他（默认）"  class="form-control" name="catalogue_title" id="tree-class">
+                                        <input type="hidden" value="99"  name="type" id="tree-catalog-id">
+                                    </div>
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <label class="start_time"><div class="d-inline p-2 bg-primary text-white">开始时间</div></label>
+                                            <input type="text" class="form-control" name="start_time" id="start_time" placeholder="yyyy-MM-dd HH:mm:ss">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="end_time"><div class="d-inline p-2 bg-primary text-white">结束时间</div></label>
+                                            <input type="text" class="form-control" name="end_time" id="end_time" placeholder="yyyy-MM-dd HH:mm:ss">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="duration"><div class="d-inline p-2 bg-primary text-white">时长</div></label>
+                                            <input type="text" class="form-control" name="duration" id="duration" placeholder="HH:mm:ss">
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+
+				</div>
+                </form>
+			</div>
+		</div>
+		<div th:include="public :: footer" ></div>
+	</div>
+	<!-- 主题 -->
+	<th:block th:include="public::setting"></th:block>
+</div>
+
+<!-- Modal -->
+<div th:include="tree :: tree-modal" ></div>
+<div class="modal fade " id="modal-userAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" >选择试卷</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+						<form class="form-inline" id="question_choice6">
+							<label class="my-1 mr-2" for="modal_question_type">题型</label>
+							<select class="custom-select my-1 mr-sm-2" name="question_type"  id="modal_question_type">
+								<option selected value="">选择</option>
+								<option value="1" >选择</option>
+								<option value="2">判断</option>
+								<option value="3">主观</option>
+							</select>
+							<label class="my-1 mr-2" for="modal_question_level">类型</label>
+							<select class="custom-select my-1 mr-sm-2" name="question_level"  id="modal_question_level">
+								<option selected value="">难度</option>
+								<option value="1" >简单</option>
+								<option value="2">中等</option>
+								<option value="3">困难</option>
+							</select>
+							<input type="text" id="modal_question_title" class="form-control"  name="question_title">
+							<a class="btn btn-primary" id="questionSearch" href="#">查询</a>
+						</form>
+						<table class="layui-hide" id="testPaper-Data" lay-data="{id:'userTableData'}" lay-filter="test"></table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block th:include="public::js"></th:block>
+
+
+<script type="text/javascript" th:src="@{/guide/js/jquery.smartWizard-2.0.min.js}"></script>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<th:block th:include="tree::tree-js"></th:block>
+<script type="text/html" id="barDemo">
+	<a class="btn btn-primary btn-xs" lay-event="edit">查看</a>
+	<button class="btn btn-danger btn-xs" lay-event="addTestPaper">选择</button>
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        // Smart Wizard
+        $('#wizard').smartWizard();
+
+    });
+
+	//选择试卷数据
+	layui.use('table', function(){
+		var table = layui.table;
+
+		//执行一个 table 实例
+		var testPaperTable=table.render({
+			skin: 'line' //行边框风格
+			,even: true //开启隔行背景
+			,elem: '#testPaper-Data'
+			,size:'lg'
+			,url: '/testPaper/findAll'//数据接口
+			,page:true
+			,parseData: function(res) { //res 即为原始返回的数据
+				return {
+					"code": res.code, //解析接口状态
+					"msg": res.msg, //解析提示文本
+					"count": res.count, //解析数据长度
+					"data": res.data.content //解析数据列表
+				}
+			}
+			,title: '班级'
+			,height: 'full-400' //高度最大化减去差值
+			,cols: [
+				[ //表头
+					{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+					,{field: 'name', title: '试卷名', width:205}
+					,{field: 'type', title: '类别', width: 80, sort: true}
+					,{field: 'duration', title: '时长', width:100, sort: true}
+					,{field: 'create_time', title: '创建时间', width: 160, sort: true}
+					,{fixed: 'right', width: 120, align:'center', toolbar: '#barDemo'}
+				]
+			]
+		});
+
+		//监听行工具事件
+		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var data = obj.data //获得当前行数据
+					,layEvent = obj.event; //获得 lay-event 对应的值
+			if(layEvent === 'addTestPaper'){
+				layer.msg('查看操作');
+				$("#testPaper-name").html(data.name);
+				$("#exam_name").val(data.name)
+				$("#testPaper-id").val(data.id);
+				$.get("/testPaper/findOne","id="+data.id,function (data) {
+				    var content2="<div id=\"testAAA\" class=\"card-body\"><div id=\"container\"></div></div>";
+                    $("#collapseOne").html(content2);
+                    var container =document.getElementById('container'),
+                        node=container.nextSibling;
+					for (var i=0;i<data.questions.length;i++){
+						addDiv(data.questions[i],container,node)
+					}
+				})
+			}
+		});
+
+
+	});
+
+
+    var content="<div id=\"testAAA\" class=\"card-body\"><div id=\"container\"></div></div>";
+    $("#collapseOne").html(content);
+
+
+	function addDiv(data,container,node){
+
+		oDiv = document.createElement('div');
+		var rs="";
+		for (var i=0;i<data.options.length;i++) {
+
+			if (data.options[i].opt_status == 1) {
+				rs =rs+"<li >\n" +
+						"                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\" checked=\"checked\" name=\"answer\" value=\"1\" disabled>\n" +
+						"                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+						"                               </li>";
+			} else {
+				rs =rs+"<li >\n" +
+						"                           <input type=\"checkbox\" class=\"custom-control-input\" id=\"checkbox-answer\"  name=\"answer\" value=\"0\" disabled>\n" +
+						"                               <label class=\"custom-control-label\" for=\"checkbox-answer\">" + data.options[i].opt_content + "</label>\n" +
+						"                               </li>"
+			}
+		}
+		oDiv.innerHTML =" <div id=\"container\">\n" +
+				"                                    <div class=\"shadow-sm p-3 mb-5 bg-grey1 rounded\">\n" +
+				"                                        <div class=\"form-inline\" id=\"question3\">\n" +
+				"                                           <input type=\"hidden\" name=\"questions_ids\" value=\""+data.id+"\">\n" +
+				"                                            <h4 class=\"text-info\">"+data.question_type+"</h4>\n" +
+				"                                            <h3>"+data.question_title+"</h3>\n" +
+				"                                            <div class=\"ml-md-auto py-2 py-md-0\">\n" +
+				"                                                <a href=\"/question/edit?id="+data.id+"\" class=\"btn btn-danger\">修改</a>\n" +
+				"                                            </div>\n" +
+				"                                        </div>\n" +
+				"                                        <div class=\"custom-control custom-checkbox\">\n" +
+				"                                            <ul id='ul-options'>"+rs+"</ul>\n" +
+				"                                        </div>\n" +
+				"                                        <h4>解析：<span >"+data.question_analysis+"</span></h4>\n" +
+				"                                        <h4>说明：</h4>\n" +
+				"                                    </div>\n" +
+				"                                </div>";
+
+
+		container.parentNode.insertBefore(oDiv, node);
+		node=oDiv.nextSibling;
+
+	}
+
+
+
+
+
+    //日期选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        var minTime=new Date();
+        var today=minTime.getFullYear()+"-" + (minTime.getMonth()+1) + "-" + minTime.getDate()+ " " + minTime.getHours()+ ":" + minTime.getMinutes()+ ":" + minTime.getSeconds();
+        var day1 = new Date();
+        day1.setDate(day1.getDate() + 2);
+        var tomorr= day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate()+ " " + day1.getHours()+ ":" + day1.getMinutes()+ ":" + day1.getSeconds();
+        //开始时间
+        laydate.render({
+            elem: '#start_time'
+            , type: 'datetime'
+            ,min:today
+            ,value:today
+        });
+        //结束时间
+        laydate.render({
+            elem: '#end_time'
+            ,type: 'datetime'
+            ,min:today
+            ,value:tomorr
+        });
+        //考试时长
+        laydate.render({
+            elem: '#duration'
+            , type: 'time'
+            ,value:'01:30:00'
+        });
+    });
+
+
+
+
+</script>
+    		
+</body>
+</html>

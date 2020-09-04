@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <th:block th:include="public::css"></th:block>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 顶部导航、边栏 -->
+    <th:block th:include="public :: header" ></th:block>
+    <!--内容-->
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">选择组卷</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">考试管理</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">选择考试</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row justify-content-center align-items-center mb-1">
+                    <div class="col-md-3 pl-md-0">
+                        <div class="card card-pricing">
+                            <div class="card-header">
+                                <h4 class="card-title">自动组卷</h4>
+                                <div class="card-price">
+                                    <span class="price">Auto</span>
+                                    <span class="text">Generation</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="specification-list">
+                                    <li>
+                                        <span class="name-specification">支持题型</span>
+                                        <span class="status-specification">4种</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义选题</span>
+                                        <span class="status-specification">NO</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自动抽题</span>
+                                        <span class="status-specification">YES</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义分数</span>
+                                        <span class="status-specification">NO</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{/testPaper/addAuto}" class="btn btn-primary btn-block"><b>进入</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-md-0">
+                        <div class="card card-pricing  card-primary">
+                            <div class="card-header">
+                                <h4 class="card-title">手动组卷</h4>
+                                <div class="card-price">
+                                    <span class="price">Manual</span>
+                                    <span class="text">Generation</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="specification-list">
+                                    <li>
+                                        <span class="name-specification">支持题型</span>
+                                        <span class="status-specification">4种</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义选题</span>
+                                        <span class="status-specification">YES</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自动抽题</span>
+                                        <span class="status-specification">NO</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义分数</span>
+                                        <span class="status-specification">Yes</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{/testPaper/addManual}" class="btn btn-light btn-block"><b>进入</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-md-0">
+                        <div class="card card-pricing">
+                            <div class="card-header">
+                                <h4 class="card-title">抽题组卷</h4>
+                                <div class="card-price">
+                                    <span class="price">Extract</span>
+                                    <span class="text">Generation</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="specification-list">
+                                    <li>
+                                        <span class="name-specification">支持题型</span>
+                                        <span class="status-specification">4种</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义选题</span>
+                                        <span class="status-specification">YES</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自动抽题</span>
+                                        <span class="status-specification">YES</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">自定义分数</span>
+                                        <span class="status-specification">Yes</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-block"><b>进入</b></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div th:include="public :: footer" ></div>
+    </div>
+
+    <!-- 主题 -->
+    <th:block th:include="public::setting"></th:block>
+</div>
+<th:block th:include="public::js"></th:block>
+</body>
+</html>
